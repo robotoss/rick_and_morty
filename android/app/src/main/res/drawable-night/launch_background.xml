@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@android:color/black" />
+
+    <item>
+        <bitmap
+            android:gravity="fill"
+            android:src="@mipmap/bg_space" />
+    </item> 
+    
+     <item>
+        <bitmap
+            android:gravity="top"
+            android:src="@mipmap/logo_text" />
+    </item> 
+
+    <item>
+        <bitmap
+            android:gravity="bottom"
+            android:src="@mipmap/logo_image_dark" />
+    </item> 
+</layer-list>
