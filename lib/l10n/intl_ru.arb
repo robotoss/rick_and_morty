@@ -14,7 +14,7 @@
   "total_locations": "Всего локаций: {count}",
   "premiere": "Премьера",
   "appearance": "Внешний вид",
-  "the_color_theme_of_the_app": "The color theme of the app",
+  "the_color_theme_of_the_app": "Цветовая тема приложения",
   "dark_theme": "Темная тема",
   "light_theme": "Светлая тема",
   "follow_the_system_settings": "Следовать настройкам системы",
@@ -39,6 +39,7 @@
   "genderless": "Бесполый",
   "wantToQuitTheApp": "Выйти из приложения?",
   "yes": "Да",
-  "no": "Нет"
+  "no": "Нет",
+  "close": "Закрыть"
 }
 

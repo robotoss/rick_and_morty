@@ -165,6 +165,10 @@
   "no": "No",
   "@no": {
       "description": ""
+  },
+  "close": "Close",
+  "@close": {
+      "description": ""
   }
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/screens/main/view_model.dart';
+import 'package:rick_and_morty/screens/settings/settings_screen.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -12,9 +13,57 @@ class MainFragment extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => MainViewModel(),
       child: Scaffold(
-        appBar: AppBar(),
+        body: _Body(),
         bottomNavigationBar: _BottomNavBar(),
       ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final vm = Provider.of<MainViewModel>(context);
+    return StreamBuilder<int>(
+      stream: vm.getIndexScreen,
+      initialData: 0,
+      builder: (_, snapshot) {
+        return IndexedStack(
+          index: snapshot.data,
+          children: <Widget>[
+            Navigator(
+              key: vm.navigatorKeys[0],
+              onGenerateRoute: (route) => MaterialPageRoute(
+                settings: route,
+                builder: (context) => Text('1'),
+              ),
+            ),
+            Navigator(
+              key: vm.navigatorKeys[1],
+              onGenerateRoute: (route) => MaterialPageRoute(
+                settings: route,
+                builder: (context) => Text('2'),
+              ),
+            ),
+            Navigator(
+              key: vm.navigatorKeys[2],
+              onGenerateRoute: (route) => MaterialPageRoute(
+                settings: route,
+                builder: (context) => Text('3'),
+              ),
+            ),
+            Navigator(
+              key: vm.navigatorKeys[3],
+              onGenerateRoute: (route) => MaterialPageRoute(
+                settings: route,
+                builder: (_) => SettingsScreen(),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

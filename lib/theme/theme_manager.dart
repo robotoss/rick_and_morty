@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeNotifier with ChangeNotifier {
   final darkTheme = ThemeData(
+    fontFamily: 'Roboto',
     // primarySwatch: Colors.grey,
     primaryColor: AppColors.primaryDark,
     brightness: Brightness.dark,
@@ -13,7 +14,7 @@ class ThemeNotifier with ChangeNotifier {
     // accentColor: Colors.white,
     // accentIconTheme: IconThemeData(color: Colors.black),
     canvasColor: AppColors.lightBlack,
-    dividerColor: Colors.black12,
+    dividerColor: AppColors.lightBlack,
     appBarTheme: AppBarTheme(
       elevation: 0,
     ),
@@ -22,9 +23,26 @@ class ThemeNotifier with ChangeNotifier {
       selectedItemColor: AppColors.green,
       unselectedItemColor: AppColors.gray,
     ),
+    textTheme: TextTheme(
+      overline: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        fontSize: 10,
+        letterSpacing: 1.5,
+        color: AppColors.textOverlineDark,
+      ),
+    ),
+    dialogBackgroundColor: AppColors.lightBlack,
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor:
+            MaterialStateProperty.resolveWith((state) => Colors.white),
+      ),
+    ),
   );
 
   final lightTheme = ThemeData(
+    fontFamily: 'Roboto',
     // primarySwatch: Colors.grey,
     primaryColor: AppColors.primaryLight,
     brightness: Brightness.light,
@@ -32,7 +50,7 @@ class ThemeNotifier with ChangeNotifier {
     // accentColor: Colors.black,
     // accentIconTheme: IconThemeData(color: Colors.white),
     canvasColor: Colors.white,
-    dividerColor: Colors.white54,
+    dividerColor: AppColors.dividerLight,
     appBarTheme: AppBarTheme(
       elevation: 0,
     ),
@@ -40,6 +58,22 @@ class ThemeNotifier with ChangeNotifier {
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       selectedItemColor: AppColors.blue,
       unselectedItemColor: AppColors.gray4,
+    ),
+    textTheme: TextTheme(
+      overline: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w500,
+        fontSize: 10,
+        letterSpacing: 1.5,
+        color: Colors.white,
+      ),
+    ),
+    dialogBackgroundColor: AppColors.lightBlack,
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor:
+            MaterialStateProperty.resolveWith((state) => AppColors.buttonText),
+      ),
     ),
   );
 
