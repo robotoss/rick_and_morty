@@ -36,6 +36,7 @@ Instructions on how to use them in your own application are linked below.
 | flutter_bloc | [https://pub.dev/packages/flutter_bloc][PlDb] |
 | provider | [https://pub.dev/packages/provider][PlGh] |
 | rxdart | [https://pub.dev/packages/rxdart][PlGd] |
+| shared_preferences | [https://pub.dev/packages/shared_preferences][PlGd] |
 
 
 
