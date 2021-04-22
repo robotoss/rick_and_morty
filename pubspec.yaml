@@ -33,9 +33,13 @@ dependencies:
   provider: ^5.0.0
   rxdart: ^0.26.0
   shared_preferences: ^2.0.5
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  # Internationalization support.
+  flutter_localizations:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
@@ -48,6 +52,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+   # Adds code generation (synthetic package) support 
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

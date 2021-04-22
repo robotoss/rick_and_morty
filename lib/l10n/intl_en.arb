@@ -1,0 +1,170 @@
+{
+  "@@locale": "en",
+  "characters": "Characters",
+  "@characters": {
+    "description": ""
+  },
+  "locations": "Locations",
+  "@locations": {
+    "description": ""
+  },
+  "episodes": "Episodes",
+  "@episodes": {
+    "description": ""
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": ""
+  },
+  "total_characters": "Total Characters: {count}",
+  "@total_characters": {
+    "description": "",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "find_a_character": "Find a character",
+  "@find_a_character": {
+    "description": ""
+  },
+  "gender": "Gender",
+  "@gender": {
+    "description": ""
+  },
+  "race": "Race",
+  "@race": {
+    "description": ""
+  },
+  "location": "Location",
+  "@location": {
+    "description": ""
+  },
+  "locality": "Locality",
+  "@locality": {
+    "description": ""
+  },
+  "all_episodes": "All episodes",
+  "@all_episodes": {
+    "description": ""
+  },
+  "total_locations": "Total Locations: {count}",
+  "@total_locations": {
+    "description": "",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "premiere": "Premiere",
+  "@premiere": {
+    "description": ""
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": ""
+  },
+  "the_color_theme_of_the_app": "App color theme",
+  "@the_color_theme_of_the_app": {
+    "description": ""
+  },
+  "dark_theme": "Dark Theme",
+  "@dark_theme": {
+    "description": ""
+  },
+  "light_theme": "Light Theme",
+  "@light_theme": {
+    "description": ""
+  },
+  "follow_the_system_settings": "Follow the system settings",
+  "@follow_the_system_settings": {
+    "description": ""
+  },
+  "about_the_app": "About the app",
+  "@about_the_app": {
+    "description": ""
+  },
+  "the_zigerionists_put_jerry_and_rick": "The Zigerionists put Jerry and Rick in the simulation to learn the secret of making concentrated dark matter.",
+  "@the_zigerionists_put_jerry_and_rick": {
+    "description": ""
+  },
+  "application_version": "Application version",
+  "@application_version": {
+    "description": ""
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": ""
+  },
+  "search_results": "Search results",
+  "@search_results": {
+    "description": ""
+  },
+  "a_character_with_this_name_was_not_found": "A character with this name was not found",
+  "@a_character_with_this_name_was_not_found": {
+    "description": ""
+  },
+  "no_locations_with_this_name_were_found": "No locations with this name were found",
+  "@no_locations_with_this_name_were_found": {
+    "description": ""
+  },
+  "there_is_no_episode_by_that_name": "There is no episode by that name",
+  "@there_is_no_episode_by_that_name": {
+    "description": ""
+  },
+  "nothing_was_found_according_to_the_filter_data": "Nothing was found according to the filter data",
+  "@nothing_was_found_according_to_the_filter_data": {
+    "description": ""
+  },
+  "filters": "Filters",
+  "@filters": {
+    "description": ""
+  },
+  "sort_by": "Sort by",
+  "@sort_by": {
+    "description": ""
+  },
+  "alphabetically": "Alphabetically",
+  "@alphabetically": {
+    "description": ""
+  },
+  "status": "Status",
+  "@status": {
+    "description": ""
+  },
+  "alive": "Alive",
+  "@alive": {
+    "description": ""
+  },
+  "dead": "Dead",
+  "@dead": {
+    "description": ""
+  },
+  "unknown": "Unknown",
+  "@unknown": {
+    "description": ""
+  },
+  "male": "Male",
+  "@male": {
+    "description": ""
+  },
+  "female": "Female",
+  "@female": {
+    "description": ""
+  },
+  "genderless": "Genderless",
+  "@genderless": {
+    "description": ""
+  },
+  "wantToQuitTheApp": "Want to quit the app?",
+  "@wantToQuitTheApp": {
+      "description": ""
+  },
+  "yes": "Yes",
+  "@yes": {
+      "description": ""
+  },
+  "no": "No",
+  "@no": {
+      "description": ""
+  }
+}
+

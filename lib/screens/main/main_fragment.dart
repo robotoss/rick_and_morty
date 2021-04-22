@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/screens/main/view_model.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainFragment extends StatelessWidget {
   const MainFragment({Key? key}) : super(key: key);
@@ -33,19 +34,19 @@ class _BottomNavBar extends StatelessWidget {
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(RickMorty.ghost),
-              label: 'Персонажи',
+              label: AppLocalizations.of(context)!.characters,
             ),
             BottomNavigationBarItem(
               icon: Icon(RickMorty.planet),
-              label: 'Локациии',
+              label: AppLocalizations.of(context)!.location,
             ),
             BottomNavigationBarItem(
               icon: Icon(RickMorty.tv),
-              label: 'Эпизоды',
+              label: AppLocalizations.of(context)!.episodes,
             ),
             BottomNavigationBarItem(
               icon: Icon(RickMorty.settings),
-              label: 'Настройки',
+              label: AppLocalizations.of(context)!.settings,
             ),
           ],
           currentIndex: snapshot.data!,
