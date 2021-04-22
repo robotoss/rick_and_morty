@@ -68,7 +68,7 @@ class ThemeNotifier with ChangeNotifier {
         color: Colors.white,
       ),
     ),
-    dialogBackgroundColor: AppColors.lightBlack,
+    dialogBackgroundColor: Colors.white,
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         foregroundColor:
