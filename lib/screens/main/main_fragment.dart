@@ -51,8 +51,6 @@ class _BottomNavBar extends StatelessWidget {
           currentIndex: snapshot.data!,
           selectedFontSize: 14,
           unselectedFontSize: 14,
-          // selectedItemColor: AppColors.primary,
-          unselectedItemColor: Colors.black.withOpacity(0.25),
           onTap: (newIndex) => vm.changeIndexScreen(newIndex),
         );
       },
