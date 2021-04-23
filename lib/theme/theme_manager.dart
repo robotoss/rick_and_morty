@@ -65,7 +65,7 @@ class ThemeNotifier with ChangeNotifier {
         fontWeight: FontWeight.w500,
         fontSize: 10,
         letterSpacing: 1.5,
-        color: Colors.white,
+        color: AppColors.textOverlineLight,
       ),
     ),
     dialogBackgroundColor: Colors.white,
