@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
 
 import 'change_theme_dialog.dart';
+import 'view_model.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _AppBar(),
-      body: _Body(),
+    return ChangeNotifierProvider(
+      create: (_) => SettingsViewModel(),
+      builder: (_, child) => Scaffold(
+        appBar: _AppBar(),
+        body: _Body(),
+      ),
     );
   }
 }
@@ -143,9 +148,16 @@ class _AppVersion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      'Rick & Morty 1.0,0',
-      style: Theme.of(context).textTheme.subtitle1,
+    final vm = context.read<SettingsViewModel>();
+    return StreamBuilder<String>(
+      stream: vm.getAppVersion,
+      initialData: '',
+      builder: (_, snapshot) {
+        return Text(
+          'Rick & Morty ${snapshot.data}',
+          style: Theme.of(context).textTheme.subtitle1,
+        );
+      },
     );
   }
 }

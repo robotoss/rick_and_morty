@@ -38,6 +38,7 @@ Instructions on how to use them in your own application are linked below.
 | rxdart | [https://pub.dev/packages/rxdart][PlGd] |
 | shared_preferences | [https://pub.dev/packages/shared_preferences][PlGd] |
 | intl | [https://pub.dev/packages/intl][PlGd] |
+| package_info | [https://pub.dev/packages/package_info][PlGd] |
 
 
 
