@@ -33,12 +33,12 @@ Instructions on how to use them in your own application are linked below.
 
 | Plugin | pub.dev |
 | ------ | ------ |
-| flutter_bloc | [https://pub.dev/packages/flutter_bloc][PlDb] |
-| provider | [https://pub.dev/packages/provider][PlGh] |
-| rxdart | [https://pub.dev/packages/rxdart][PlGd] |
-| shared_preferences | [https://pub.dev/packages/shared_preferences][PlGd] |
-| intl | [https://pub.dev/packages/intl][PlGd] |
-| package_info | [https://pub.dev/packages/package_info][PlGd] |
+| flutter_bloc | [https://pub.dev/packages/flutter_bloc] |
+| provider | [https://pub.dev/packages/provider] |
+| rxdart | [https://pub.dev/packages/rxdart] |
+| shared_preferences | [https://pub.dev/packages/shared_preferences] |
+| intl | [https://pub.dev/packages/intl] |
+| package_info | [https://pub.dev/packages/package_info] |
 
 
 
