@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/data/helpers/theme_types.dart';
+import 'package:rick_and_morty/theme/theme_manager.dart';
 
 Future<void> showChangeThemeDialog(BuildContext context) async {
   return await showDialog(
@@ -16,6 +18,7 @@ class _ChangeTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeVM = Provider.of<ThemeNotifier>(context);
     return Dialog(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -34,8 +37,8 @@ class _ChangeTheme extends StatelessWidget {
                 AppLocalizations.of(context)!.dark_theme,
               ),
               value: ThemeType.dark,
-              groupValue: ThemeType.dark,
-              onChanged: (value) {},
+              groupValue: themeVM.getThemeType(),
+              onChanged: (value) => themeVM.setThemeStyle(value!),
             ),
             RadioListTile<ThemeType>(
               contentPadding: const EdgeInsets.all(0),
@@ -43,8 +46,8 @@ class _ChangeTheme extends StatelessWidget {
                 AppLocalizations.of(context)!.light_theme,
               ),
               value: ThemeType.light,
-              groupValue: ThemeType.dark,
-              onChanged: (value) {},
+              groupValue: themeVM.getThemeType(),
+              onChanged: (value) => themeVM.setThemeStyle(value!),
             ),
             RadioListTile<ThemeType>(
               contentPadding: const EdgeInsets.all(0),
@@ -52,8 +55,8 @@ class _ChangeTheme extends StatelessWidget {
                 AppLocalizations.of(context)!.follow_the_system_settings,
               ),
               value: ThemeType.byDevice,
-              groupValue: ThemeType.dark,
-              onChanged: (value) {},
+              groupValue: themeVM.getThemeType(),
+              onChanged: (value) => themeVM.setThemeStyle(value!),
             ),
             Align(
               alignment: Alignment.bottomRight,

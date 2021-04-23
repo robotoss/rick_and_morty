@@ -80,7 +80,15 @@ class ThemeNotifier with ChangeNotifier {
   late ThemeData _themeData;
   ThemeData getTheme() => _themeData;
 
+  late ThemeType _activeThemeType;
+
+  ThemeType getThemeType() => _activeThemeType;
+
   ThemeNotifier() {
+    initTheme();
+  }
+
+  void initTheme() {
     final brightness = SchedulerBinding.instance!.window.platformBrightness;
     if (brightness == Brightness.dark) {
       _themeData = darkTheme;
@@ -88,22 +96,20 @@ class ThemeNotifier with ChangeNotifier {
       _themeData = lightTheme;
     }
 
-    late ThemeType activeThemeType;
-
     SharedPreferences.getInstance().then(
       (prefs) {
         final localThemeType = prefs.getString('ThemeType');
 
         if (localThemeType != null) {
-          activeThemeType = ThemeType.values
+          _activeThemeType = ThemeType.values
               .firstWhere((element) => element.toString() == localThemeType);
         } else {
-          activeThemeType = ThemeType.byDevice;
+          _activeThemeType = ThemeType.byDevice;
         }
 
-        if (activeThemeType == ThemeType.dark) {
+        if (_activeThemeType == ThemeType.dark) {
           _themeData = darkTheme;
-        } else if (activeThemeType == ThemeType.light) {
+        } else if (_activeThemeType == ThemeType.light) {
           _themeData = lightTheme;
         } else {
           final brightness =
@@ -118,29 +124,12 @@ class ThemeNotifier with ChangeNotifier {
         notifyListeners();
       },
     );
-
-    // StorageManager.readData('themeMode').then((value) {
-    //   print('value read from storage: ' + value.toString());
-    //   var themeMode = value ?? 'light';
-    //   if (themeMode == 'light') {
-    //     _themeData = lightTheme;
-    //   } else {
-    //     print('setting dark theme');
-    //     _themeData = darkTheme;
-    //   }
-    //   notifyListeners();
-    // });
   }
 
-  // void setDarkMode() async {
-  //   _themeData = darkTheme;
-  //   StorageManager.saveData('themeMode', 'dark');
-  //   notifyListeners();
-  // }
-
-  // void setLightMode() async {
-  //   _themeData = lightTheme;
-  //   StorageManager.saveData('themeMode', 'light');
-  //   notifyListeners();
-  // }
+  void setThemeStyle(ThemeType themeType) async {
+    final pref = await SharedPreferences.getInstance();
+    await pref.setString('ThemeType', '$themeType');
+    _activeThemeType = themeType;
+    initTheme();
+  }
 }
