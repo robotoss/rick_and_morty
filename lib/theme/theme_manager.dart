@@ -92,8 +92,10 @@ class ThemeNotifier with ChangeNotifier {
     final brightness = SchedulerBinding.instance!.window.platformBrightness;
     if (brightness == Brightness.dark) {
       _themeData = darkTheme;
+      _activeThemeType = ThemeType.dark;
     } else {
       _themeData = lightTheme;
+      _activeThemeType = ThemeType.light;
     }
 
     SharedPreferences.getInstance().then(

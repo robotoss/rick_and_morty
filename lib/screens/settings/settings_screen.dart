@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/data/helpers/theme_types.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
+import 'package:rick_and_morty/theme/theme_manager.dart';
 
 import 'change_theme_dialog.dart';
 import 'view_model.dart';
@@ -115,7 +117,10 @@ class _Appearance extends StatelessWidget {
                 style: Theme.of(context).textTheme.subtitle1,
               ),
               Text(
-                AppLocalizations.of(context)!.dark_theme,
+                themeName(
+                  Provider.of<ThemeNotifier>(context).getThemeType(),
+                  AppLocalizations.of(context)!,
+                ),
                 style: AppTextStyles.subTitle,
               ),
             ],
