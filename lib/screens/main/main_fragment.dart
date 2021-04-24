@@ -80,13 +80,17 @@ class _BottomNavBar extends StatelessWidget {
       builder: (_, snapshot) {
         return BottomNavigationBar(
           showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(RickMorty.ghost),
               label: AppLocalizations.of(context)!.characters,
             ),
             BottomNavigationBarItem(
-              icon: Icon(RickMorty.planet),
+              icon: Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Icon(RickMorty.planet),
+              ),
               label: AppLocalizations.of(context)!.location,
             ),
             BottomNavigationBarItem(
