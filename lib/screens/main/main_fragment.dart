@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/components/loadings/portal_loading.dart';
 import 'package:rick_and_morty/screens/main/view_model.dart';
 import 'package:rick_and_morty/screens/settings/settings_screen.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
@@ -37,7 +38,15 @@ class _Body extends StatelessWidget {
               key: vm.navigatorKeys[0],
               onGenerateRoute: (route) => MaterialPageRoute(
                 settings: route,
-                builder: (context) => Text('1'),
+                builder: (context) => Scaffold(
+                  appBar: AppBar(),
+                  body: Center(
+                    child: IconButton(
+                      onPressed: () => showLoadingPortal(context),
+                      icon: Icon(Icons.ac_unit),
+                    ),
+                  ),
+                ),
               ),
             ),
             Navigator(
