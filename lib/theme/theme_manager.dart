@@ -4,7 +4,13 @@ import 'package:rick_and_morty/data/helpers/theme_types.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+// Dark and Light Srtyles for application
+
 class ThemeNotifier with ChangeNotifier {
+  ///
+  /// APPLICATION DARK STYLE
+  ///
+
   final darkTheme = ThemeData(
     fontFamily: 'Roboto',
     // primarySwatch: Colors.grey,
@@ -40,6 +46,10 @@ class ThemeNotifier with ChangeNotifier {
       ),
     ),
   );
+
+  ///
+  /// APPLICATION LIGHT STYLE
+  ///
 
   final lightTheme = ThemeData(
     fontFamily: 'Roboto',
@@ -77,18 +87,21 @@ class ThemeNotifier with ChangeNotifier {
     ),
   );
 
+  // Active theme style
   late ThemeData _themeData;
   ThemeData getTheme() => _themeData;
 
+  // Active theme type
   late ThemeType _activeThemeType;
-
   ThemeType getThemeType() => _activeThemeType;
 
   ThemeNotifier() {
+    // Initial active theme style and type
     initTheme();
   }
 
   void initTheme() {
+    // Detected theme (light or dark)
     final brightness = SchedulerBinding.instance!.window.platformBrightness;
     if (brightness == Brightness.dark) {
       _themeData = darkTheme;
@@ -98,6 +111,7 @@ class ThemeNotifier with ChangeNotifier {
       _activeThemeType = ThemeType.light;
     }
 
+    // Get data from local save
     SharedPreferences.getInstance().then(
       (prefs) {
         final localThemeType = prefs.getString('ThemeType');
@@ -128,6 +142,7 @@ class ThemeNotifier with ChangeNotifier {
     );
   }
 
+  // Change application Theme (light, dark, system)
   void setThemeStyle(ThemeType themeType) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setString('ThemeType', '$themeType');

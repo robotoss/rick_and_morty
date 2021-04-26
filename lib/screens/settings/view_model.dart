@@ -6,6 +6,7 @@ import 'package:rxdart/rxdart.dart';
 
 class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel() {
+    // Get application version
     if (Platform.isIOS || Platform.isAndroid) {
       PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
         _appVersion.add('${packageInfo.version}(${packageInfo.buildNumber})');
@@ -15,6 +16,7 @@ class SettingsViewModel extends ChangeNotifier {
     }
   }
 
+  // Applications version Stream
   final _appVersion = BehaviorSubject<String>.seeded('');
   Stream<String> get getAppVersion => _appVersion.stream;
 }
