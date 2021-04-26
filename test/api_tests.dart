@@ -17,7 +17,7 @@ void main() {
     test('getAllCharacters', () async {
       final response = await serverApi.getAllCharacters();
 
-      expect(response, true);
+      expect(response.results, isNotEmpty);
     });
   });
 }
