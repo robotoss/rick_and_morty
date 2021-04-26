@@ -34,6 +34,7 @@ Instructions on how to use them in your own application are linked below.
 | Plugin | pub.dev |
 | ------ | ------ |
 | flutter_bloc | [https://pub.dev/packages/flutter_bloc] |
+| equatable | [https://pub.dev/packages/equatable] |
 | provider | [https://pub.dev/packages/provider] |
 | rxdart | [https://pub.dev/packages/rxdart] |
 | shared_preferences | [https://pub.dev/packages/shared_preferences] |

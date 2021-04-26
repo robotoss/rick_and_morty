@@ -11,9 +11,9 @@ class Repository {
   }
 
   Future init() async {
-    _prefs = await SharedPreferences.getInstance();
     _dio = _getDio();
     serverApi = ServerApi(_dio);
+    _prefs = await SharedPreferences.getInstance();
   }
 
   late SharedPreferences _prefs;

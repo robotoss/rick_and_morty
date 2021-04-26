@@ -5,19 +5,19 @@ Future<void> showLoadingPortal(BuildContext context) async {
   return showDialog(
     context: context,
     builder: (context) {
-      return _PortalLoading();
+      return PortalLoading();
     },
   );
 }
 
-class _PortalLoading extends StatefulWidget {
-  const _PortalLoading({Key? key}) : super(key: key);
+class PortalLoading extends StatefulWidget {
+  const PortalLoading({Key? key}) : super(key: key);
 
   @override
-  __PortalLoadingState createState() => __PortalLoadingState();
+  _PortalLoadingState createState() => _PortalLoadingState();
 }
 
-class __PortalLoadingState extends State<_PortalLoading>
+class _PortalLoadingState extends State<PortalLoading>
     with TickerProviderStateMixin {
   late AnimationController controllerBottom;
   late AnimationController controllerTop;
@@ -33,6 +33,13 @@ class __PortalLoadingState extends State<_PortalLoading>
       vsync: this,
       duration: Duration(seconds: 6),
     )..repeat();
+  }
+
+  @override
+  void dispose() {
+    controllerBottom.dispose();
+    controllerTop.dispose();
+    super.dispose();
   }
 
   @override
