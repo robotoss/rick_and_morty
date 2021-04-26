@@ -39,6 +39,7 @@ Instructions on how to use them in your own application are linked below.
 | shared_preferences | [https://pub.dev/packages/shared_preferences] |
 | intl | [https://pub.dev/packages/intl] |
 | package_info | [https://pub.dev/packages/package_info] |
+| dio | [https://pub.dev/packages/dio] |
 
 
 

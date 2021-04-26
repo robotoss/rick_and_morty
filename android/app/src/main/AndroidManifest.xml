@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rick_and_morty">
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
         android:label="Rick &amp; Morty"
         android:icon="@mipmap/ic_launcher">
