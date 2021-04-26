@@ -2,6 +2,7 @@
 //
 //     final allCharactersModel = allCharactersModelFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 AllCharactersModel allCharactersModelFromJson(String str) =>
@@ -36,14 +37,14 @@ class Info {
   Info({
     required this.count,
     required this.pages,
-    required this.next,
-    required this.prev,
+    this.next,
+    this.prev,
   });
 
   int count;
   int pages;
-  String next;
-  dynamic prev;
+  String? next;
+  String? prev;
 
   factory Info.fromJson(Map<String, dynamic> json) => Info(
         count: json['count'],
