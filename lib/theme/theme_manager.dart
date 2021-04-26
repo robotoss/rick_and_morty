@@ -38,6 +38,13 @@ class ThemeNotifier with ChangeNotifier {
         letterSpacing: 1.5,
         color: AppColors.textOverlineDark,
       ),
+      bodyText1: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        letterSpacing: 0.44,
+        color: AppColors.textOverlineDark,
+      ),
     ),
     dialogBackgroundColor: AppColors.lightBlack,
     textButtonTheme: TextButtonThemeData(
@@ -45,6 +52,9 @@ class ThemeNotifier with ChangeNotifier {
         foregroundColor:
             MaterialStateProperty.resolveWith((state) => Colors.white),
       ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: AppColors.lightBlack,
     ),
   );
 
@@ -78,6 +88,13 @@ class ThemeNotifier with ChangeNotifier {
         letterSpacing: 1.5,
         color: AppColors.textOverlineLight,
       ),
+      bodyText1: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        letterSpacing: 0.44,
+        color: AppColors.textOverlineLight,
+      ),
     ),
     dialogBackgroundColor: Colors.white,
     textButtonTheme: TextButtonThemeData(
@@ -85,6 +102,9 @@ class ThemeNotifier with ChangeNotifier {
         foregroundColor:
             MaterialStateProperty.resolveWith((state) => AppColors.buttonText),
       ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      fillColor: AppColors.dividerLight,
     ),
   );
 
