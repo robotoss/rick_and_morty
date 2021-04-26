@@ -9,7 +9,7 @@ class Repository {
   late SharedPreferences prefs;
 
   ThemeType? getThemeType() {
-    final type = prefs.getString('ThemeType');
+    final type = prefs.getString(Constants.ThemeType);
     return type as ThemeType;
   }
 }

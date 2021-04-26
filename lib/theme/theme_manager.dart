@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:rick_and_morty/data/helpers/theme_types.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
+import 'package:rick_and_morty/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // Dark and Light Srtyles for application
@@ -114,7 +115,7 @@ class ThemeNotifier with ChangeNotifier {
     // Get data from local save
     SharedPreferences.getInstance().then(
       (prefs) {
-        final localThemeType = prefs.getString('ThemeType');
+        final localThemeType = prefs.getString(Constants.ThemeType);
 
         if (localThemeType != null) {
           _activeThemeType = ThemeType.values
@@ -145,7 +146,7 @@ class ThemeNotifier with ChangeNotifier {
   // Change application Theme (light, dark, system)
   void setThemeStyle(ThemeType themeType) async {
     final pref = await SharedPreferences.getInstance();
-    await pref.setString('ThemeType', '$themeType');
+    await pref.setString(Constants.ThemeType, '$themeType');
     _activeThemeType = themeType;
     initTheme();
   }
