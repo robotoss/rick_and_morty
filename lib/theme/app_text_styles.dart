@@ -8,4 +8,10 @@ class AppTextStyles {
     fontSize: 14,
     color: AppColors.subTitle.withOpacity(0.6),
   );
+
+  static final charName = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    letterSpacing: 0.5,
+  );
 }
