@@ -21,6 +21,7 @@ class RickMorty {
   static const _kFontFam = 'RickMorty';
   static const String? _kFontPkg = null;
 
+  static const IconData list = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData tv = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData settings = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData search = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
