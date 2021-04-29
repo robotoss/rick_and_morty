@@ -16,6 +16,8 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   List<Character> _characters = [];
 
+  int _charactersCount = 0;
+
   @override
   Stream<CharactersState> mapEventToState(
     CharactersEvent event,
@@ -30,7 +32,11 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       final response = await repository.serverApi.getAllCharacters();
       _page++;
       _characters = response.results;
-      yield CharactersDataState(characters: _characters);
+      _charactersCount = response.info.count;
+      yield CharactersDataState(
+        characters: _characters,
+        charactersCount: _charactersCount,
+      );
     } catch (error) {}
   }
 }
