@@ -138,7 +138,9 @@ class _BodyList extends StatelessWidget {
               )
             : SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 164 / 190),
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.82,
+                ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => ListTile(
                     title: _CharacterGridItem(character: characters[index]),
@@ -226,6 +228,8 @@ class _CharacterGridItem extends StatelessWidget {
               const SizedBox(height: 5),
               Text(
                 character.name,
+                textAlign: TextAlign.center,
+                maxLines: 2,
                 style: AppTextStyles.charName.copyWith(
                   color: Theme.of(context).accentColor,
                 ),
