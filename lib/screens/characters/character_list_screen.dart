@@ -138,13 +138,13 @@ class _BodyList extends StatelessWidget {
               )
             : SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 0.82,
-                ),
+                    crossAxisCount: 2,
+                    childAspectRatio:
+                        MediaQuery.of(context).size.width / 2 / 192,
+                    mainAxisExtent: 239),
                 delegate: SliverChildBuilderDelegate(
-                  (context, index) => ListTile(
-                    title: _CharacterGridItem(character: characters[index]),
-                  ),
+                  (context, index) =>
+                      _CharacterGridItem(character: characters[index]),
                   childCount: characters.length,
                 ),
               );
@@ -169,29 +169,33 @@ class _CharacterListItem extends StatelessWidget {
             backgroundImage: NetworkImage(character.image),
           ),
           const SizedBox(width: 16),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                character.status.toUpperCase(),
-                style: Theme.of(context)
-                    .textTheme
-                    .overline!
-                    .copyWith(color: character.statusColor),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                character.name,
-                style: AppTextStyles.charName.copyWith(
-                  color: Theme.of(context).accentColor,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  character.status.toUpperCase(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .overline!
+                      .copyWith(color: character.statusColor),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                '${character.species}, ${character.gender}',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ],
+                const SizedBox(height: 5),
+                Text(
+                  character.name,
+                  maxLines: 2,
+                  textAlign: TextAlign.start,
+                  style: AppTextStyles.charName.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  '${character.species}, ${character.gender}',
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ],
+            ),
           )
         ],
       ),
