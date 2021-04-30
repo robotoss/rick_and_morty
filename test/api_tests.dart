@@ -15,7 +15,7 @@ void main() {
 
   group('CHARACTERS', () {
     test('getAllCharacters', () async {
-      final response = await serverApi.getAllCharacters();
+      final response = await serverApi.getAllCharacters(1);
 
       expect(response.results, isNotEmpty);
     });
