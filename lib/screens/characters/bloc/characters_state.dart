@@ -12,15 +12,18 @@ class CharactersInitialState extends CharactersState {}
 class CharactersDataState extends CharactersState {
   final List<Character> characters;
   final int charactersCount;
+  final bool isLoading;
 
   CharactersDataState({
     required this.characters,
     required this.charactersCount,
+    required this.isLoading,
   });
 
   @override
   List<Object> get props => [
         characters,
         charactersCount,
+        isLoading,
       ];
 }

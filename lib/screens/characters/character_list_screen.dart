@@ -31,6 +31,12 @@ class CharacterListScreen extends StatelessWidget {
           },
           builder: (context, state) {
             return CustomScrollView(
+              controller:
+                  Provider.of<CharactersViewModel>(context).addScrollListener(
+                () => context
+                    .read<CharactersBloc>()
+                    .add(GetMoreCharactersEvent()),
+              ),
               slivers: [
                 _AppBar(
                   charactersCount:

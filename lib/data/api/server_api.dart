@@ -11,8 +11,8 @@ class ServerApi {
   ///
 
   /// Get list of all characters
-  Future<AllCharactersModel> getAllCharacters() async {
-    final response = await dio.get('character');
+  Future<AllCharactersModel> getAllCharacters(int pageIndex) async {
+    final response = await dio.get('character/?page=$pageIndex');
     return allCharactersModelFromJson(response.toString());
   }
 }
