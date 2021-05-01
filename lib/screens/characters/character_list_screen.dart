@@ -6,8 +6,10 @@ import 'package:rick_and_morty/components/text_filds/app_bar_search_text_field.d
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rick_and_morty/data/api/models/all_characters_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
+import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
+import 'package:shimmer/shimmer.dart';
 import 'character_extentions.dart';
 
 import 'bloc/characters_bloc.dart';
@@ -46,7 +48,9 @@ class CharacterListScreen extends StatelessWidget {
                 if (state is CharactersDataState)
                   _BodyList(
                     characters: state.characters,
-                  )
+                  ),
+                if (state is CharactersDataState && state.isLoading)
+                  _CharacterLoadingItem()
               ],
             );
           },
@@ -253,6 +257,129 @@ class _CharacterGridItem extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class _CharacterLoadingItem extends StatelessWidget {
+  const _CharacterLoadingItem({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final vm = Provider.of<CharactersViewModel>(context);
+    return StreamBuilder<bool>(
+      stream: vm.getIsColumnType,
+      initialData: true,
+      builder: (_, snapshot) {
+        return snapshot.data!
+            ? SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 24, 14, 24),
+                  child: Shimmer.fromColors(
+                    baseColor: AppColors.gray.withOpacity(0.1),
+                    highlightColor: Theme.of(context).accentColor,
+                    enabled: true,
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundColor: Colors.white,
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                color: Colors.white,
+                                child: Text(
+                                  'SOMESTATUS',
+                                  style: Theme.of(context).textTheme.overline,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                color: Colors.white,
+                                child: Text(
+                                  'Test Name Some Person',
+                                  textAlign: TextAlign.start,
+                                  style: AppTextStyles.charName.copyWith(
+                                    color: Theme.of(context).accentColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                color: Colors.white,
+                                child: Text(
+                                  'Test, Value',
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              )
+            : SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio:
+                        MediaQuery.of(context).size.width / 2 / 192,
+                    mainAxisExtent: 239),
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) => Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: Shimmer.fromColors(
+                      baseColor: AppColors.gray.withOpacity(0.1),
+                      highlightColor: Theme.of(context).accentColor,
+                      enabled: true,
+                      child: Column(
+                        children: [
+                          CircleAvatar(radius: 60),
+                          const SizedBox(height: 18),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                color: Colors.white,
+                                child: Text(
+                                  'SOMESTATUS',
+                                  style: Theme.of(context).textTheme.overline,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                color: Colors.white,
+                                child: Text(
+                                  'Test Name Some Person',
+                                  textAlign: TextAlign.center,
+                                  style: AppTextStyles.charName.copyWith(
+                                    color: Theme.of(context).accentColor,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              Container(
+                                color: Colors.white,
+                                child: Text(
+                                  'Test, Value',
+                                  style: Theme.of(context).textTheme.caption,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  childCount: 2,
+                ),
+              );
+      },
     );
   }
 }

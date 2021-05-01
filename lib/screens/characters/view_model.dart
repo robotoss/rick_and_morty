@@ -7,15 +7,20 @@ class CharactersViewModel extends ChangeNotifier {
 
   final scrollController = ScrollController();
 
-  ScrollController addScrollListener(VoidCallback onEndScroll) {
+  ScrollController addScrollListener(Function onEndScroll) {
     if (!scrollController.hasListeners) {
       scrollController.addListener(() {
+        var canUpdate = true;
         if (scrollController.position.maxScrollExtent >
                 scrollController.offset &&
             scrollController.position.maxScrollExtent -
                     scrollController.offset <=
-                50) {
+                50 &&
+            canUpdate) {
+          canUpdate = true;
           onEndScroll();
+        } else {
+          canUpdate = true;
         }
       });
     }

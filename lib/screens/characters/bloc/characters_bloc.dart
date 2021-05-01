@@ -49,12 +49,15 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     if (state is CharactersDataState) {
       _state = state as CharactersDataState;
     }
+    print('Step_1');
     if (_state is CharactersDataState && !_state.isLoading) {
+      print('Step_2');
       yield CharactersDataState(
         characters: _characters,
         charactersCount: _charactersCount,
         isLoading: true,
       );
+      print('Step_3');
       try {
         final response =
             await repository.serverApi.getAllCharacters(_pageIndex);
@@ -66,6 +69,9 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
           isLoading: false,
         );
       } catch (error) {}
+    } else {
+      print('Step_Retrun');
+      return;
     }
   }
 }
