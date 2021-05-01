@@ -66,7 +66,7 @@ class DioSettings {
     );
 
     // Add logs in Debug versions
-    if (kReleaseMode) {
+    if (!kReleaseMode) {
       interceptors.add(
         LogInterceptor(
           request: true,
