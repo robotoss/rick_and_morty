@@ -36,6 +36,7 @@ class _Body extends StatelessWidget {
           children: <Widget>[
             Navigator(
               key: vm.navigatorKeys[0],
+              observers: [HeroController()],
               onGenerateRoute: (route) => MaterialPageRoute(
                 settings: route,
                 builder: (context) => CharacterListScreen(),
