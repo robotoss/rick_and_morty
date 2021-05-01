@@ -41,6 +41,7 @@ dependencies:
   package_info: ^2.0.0
   dio: ^4.0.0
   shimmer: ^2.0.0
+  another_flushbar: ^1.10.20
   
 
 dev_dependencies:

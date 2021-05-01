@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/components/loadings/portal_loading.dart';
 import 'package:rick_and_morty/components/text_filds/app_bar_search_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -29,8 +30,11 @@ class CharacterListScreen extends StatelessWidget {
         child: Scaffold(
             body: BlocConsumer<CharactersBloc, CharactersState>(
           listener: (context, state) {
-            // TODO: implement listener
+            if (state is CharactersFailureState) {
+              showErrorSnakBar(context, state.message);
+            }
           },
+          buildWhen: (_, current) => current is! CharactersFailureState,
           builder: (context, state) {
             return CustomScrollView(
               controller:

@@ -42,6 +42,7 @@ Instructions on how to use them in your own application are linked below.
 | package_info | [https://pub.dev/packages/package_info] |
 | dio | [https://pub.dev/packages/dio] |
 | shimmer | [https://pub.dev/packages/shimmer] |
+| another_flushbar | [https://pub.dev/packages/another_flushbar] |
 
 
 

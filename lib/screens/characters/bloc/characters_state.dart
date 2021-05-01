@@ -27,3 +27,12 @@ class CharactersDataState extends CharactersState {
         isLoading,
       ];
 }
+
+class CharactersFailureState extends CharactersState {
+  final String message;
+
+  const CharactersFailureState({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}

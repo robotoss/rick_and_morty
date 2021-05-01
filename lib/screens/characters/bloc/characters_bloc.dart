@@ -41,12 +41,14 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       _pageIndex++;
       _characters = response.results;
       _charactersCount = response.info.count;
-      yield CharactersDataState(
-        characters: _characters,
-        charactersCount: _charactersCount,
-        isLoading: false,
-      );
-    } catch (error) {}
+    } catch (error) {
+      yield CharactersFailureState(message: error.toString());
+    }
+    yield CharactersDataState(
+      characters: _characters,
+      charactersCount: _charactersCount,
+      isLoading: false,
+    );
   }
 
   Stream<CharactersState> _buildGetMoreCharactersEvent() async* {
@@ -55,17 +57,18 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       charactersCount: _charactersCount,
       isLoading: true,
     );
-    await Future.delayed(Duration(seconds: 10));
 
     try {
       final response = await repository.serverApi.getAllCharacters(_pageIndex);
       _pageIndex++;
       _characters.addAll(response.results);
-      yield CharactersDataState(
-        characters: _characters,
-        charactersCount: _charactersCount,
-        isLoading: false,
-      );
-    } catch (error) {}
+    } catch (error) {
+      yield CharactersFailureState(message: error.toString());
+    }
+    yield CharactersDataState(
+      characters: _characters,
+      charactersCount: _charactersCount,
+      isLoading: false,
+    );
   }
 }
