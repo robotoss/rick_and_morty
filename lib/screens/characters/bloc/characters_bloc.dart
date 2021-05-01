@@ -25,6 +25,11 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     if (event is GetAllCharactersEvent) {
       yield* _buildGetAllCharactersEvent();
     }
+
+    if (state is CharactersDataState) {
+      final _state = state as CharactersDataState;
+      if (!_state.isLoading) yield* _buildGetMoreCharactersEvent();
+    }
     if (event is GetMoreCharactersEvent) {
       yield* _buildGetMoreCharactersEvent();
     }
@@ -50,6 +55,7 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       charactersCount: _charactersCount,
       isLoading: true,
     );
+    await Future.delayed(Duration(seconds: 10));
 
     try {
       final response = await repository.serverApi.getAllCharacters(_pageIndex);

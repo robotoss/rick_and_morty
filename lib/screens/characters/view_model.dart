@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'bloc/characters_bloc.dart';
-
 class CharactersViewModel extends ChangeNotifier {
   final characterTextController = TextEditingController();
   final characterFocusNode = FocusNode();
 
   final scrollController = ScrollController();
 
-  ScrollController addScrollListener(CharactersBloc bloc) {
+  ScrollController addScrollListener(Function onEndOfList) {
     // Check that scrollController has't have the listener
     if (!scrollController.hasListeners) {
       // Add Listener to controller to check that usern in end of the character
@@ -18,10 +16,7 @@ class CharactersViewModel extends ChangeNotifier {
         var triggerFetchMoreSize =
             0.9 * scrollController.position.maxScrollExtent;
         if (scrollController.position.pixels > triggerFetchMoreSize) {
-          if (bloc.state is CharactersDataState) {
-            final _state = bloc.state as CharactersDataState;
-            if (!_state.isLoading) bloc.add(GetMoreCharactersEvent());
-          }
+          onEndOfList();
         }
       });
     }
