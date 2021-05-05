@@ -239,40 +239,52 @@ class _CharacterGridItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 24),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 60,
-            backgroundImage: NetworkImage(character.image),
-          ),
-          const SizedBox(height: 18),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                character.status.toUpperCase(),
-                style: Theme.of(context)
-                    .textTheme
-                    .overline!
-                    .copyWith(color: character.statusColor),
+      child: InkWell(
+        hoverColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onTap: () => Navigator.of(context, rootNavigator: true).push(
+          characterInfoRoute(character),
+        ),
+        child: Column(
+          children: [
+            Hero(
+              tag: 'CharacterAvatar_${character.id}',
+              child: CircleAvatar(
+                radius: 60,
+                backgroundImage: NetworkImage(character.image),
               ),
-              const SizedBox(height: 5),
-              Text(
-                character.name,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                style: AppTextStyles.charName.copyWith(
-                  color: Theme.of(context).accentColor,
+            ),
+            const SizedBox(height: 18),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  character.status.toUpperCase(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .overline!
+                      .copyWith(color: character.statusColor),
                 ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                '${character.species}, ${character.gender}',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ],
-          )
-        ],
+                const SizedBox(height: 5),
+                Text(
+                  character.name,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  style: AppTextStyles.charName.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  '${character.species}, ${character.gender}',
+                  style: Theme.of(context).textTheme.caption,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

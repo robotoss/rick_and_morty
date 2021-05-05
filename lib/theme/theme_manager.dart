@@ -24,6 +24,9 @@ class ThemeNotifier with ChangeNotifier {
     dividerColor: AppColors.lightBlack,
     appBarTheme: AppBarTheme(
       elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.white,
+      ),
     ),
     scaffoldBackgroundColor: AppColors.primaryDark,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -81,6 +84,9 @@ class ThemeNotifier with ChangeNotifier {
     dividerColor: AppColors.dividerLight,
     appBarTheme: AppBarTheme(
       elevation: 0,
+      iconTheme: IconThemeData(
+        color: AppColors.textOverlineLight,
+      ),
     ),
     scaffoldBackgroundColor: AppColors.primaryLight,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
