@@ -241,7 +241,10 @@ class _CharacterLocationInfo extends StatelessWidget {
             value: character.location,
           ),
           const SizedBox(height: 26),
-          const Divider(),
+          const Divider(
+            thickness: 2,
+            height: 2,
+          ),
         ],
       ),
     );
