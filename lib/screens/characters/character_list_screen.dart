@@ -12,7 +12,7 @@ import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
 import 'package:shimmer/shimmer.dart';
-import 'character_extentions.dart';
+import 'package:rick_and_morty/data/extensions/character_extentions.dart';
 
 import 'bloc/characters_bloc.dart';
 import 'view_model.dart';
