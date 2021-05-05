@@ -34,6 +34,20 @@ class ThemeNotifier with ChangeNotifier {
       unselectedItemColor: AppColors.gray,
     ),
     textTheme: TextTheme(
+      headline4: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 34,
+        letterSpacing: 0.25,
+        color: Colors.white,
+      ),
+      headline6: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        fontSize: 20,
+        letterSpacing: 0.15,
+        color: Colors.white,
+      ),
       overline: TextStyle(
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
@@ -54,6 +68,13 @@ class ThemeNotifier with ChangeNotifier {
         fontSize: 16,
         letterSpacing: 0.44,
         color: AppColors.textOverlineDark,
+      ),
+      bodyText2: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
+        letterSpacing: 0.25,
+        color: Colors.white,
       ),
     ),
     dialogBackgroundColor: AppColors.lightBlack,
@@ -94,6 +115,20 @@ class ThemeNotifier with ChangeNotifier {
       unselectedItemColor: AppColors.gray4,
     ),
     textTheme: TextTheme(
+      headline4: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 34,
+        letterSpacing: 0.25,
+        color: AppColors.black,
+      ),
+      headline6: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w600,
+        fontSize: 20,
+        letterSpacing: 0.15,
+        color: AppColors.black,
+      ),
       overline: TextStyle(
         fontStyle: FontStyle.normal,
         fontWeight: FontWeight.w500,
@@ -114,6 +149,13 @@ class ThemeNotifier with ChangeNotifier {
         fontSize: 16,
         letterSpacing: 0.44,
         color: AppColors.textOverlineLight,
+      ),
+      bodyText2: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 14,
+        letterSpacing: 0.25,
+        color: Colors.black,
       ),
     ),
     dialogBackgroundColor: Colors.white,
