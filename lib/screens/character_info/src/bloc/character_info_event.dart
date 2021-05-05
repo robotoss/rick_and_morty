@@ -1,8 +1,5 @@
 part of 'character_info_bloc.dart';
 
-abstract class CharacterInfoEvent extends Equatable {
-  const CharacterInfoEvent();
+abstract class CharacterInfoEvent {}
 
-  @override
-  List<Object> get props => [];
-}
+class GetEpisodesEvent extends CharacterInfoEvent {}
