@@ -1,11 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/data/api/models/all_characters_model.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
+import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rick_and_morty/data/extensions/character_extentions.dart';
+import 'package:shimmer/shimmer.dart';
+
+import 'bloc/character_info_bloc.dart';
 
 class CharacterInfoScreen extends StatelessWidget {
   final Character character;
@@ -16,23 +22,30 @@ class CharacterInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverPersistentHeader(
-            delegate: _AppBar(
-              character: character,
-              expandedHeight: 218,
-              safeAreaSize: MediaQuery.of(context).padding.top,
+    return BlocListener<CharacterInfoBloc, CharacterInfoState>(
+      listener: (context, state) {
+        if (state is CharacterInfoFailureState) {
+          showErrorSnakBar(context, state.message);
+        }
+      },
+      child: Scaffold(
+        body: CustomScrollView(
+          slivers: [
+            SliverPersistentHeader(
+              delegate: _AppBar(
+                character: character,
+                expandedHeight: 218,
+                safeAreaSize: MediaQuery.of(context).padding.top,
+              ),
+              pinned: true,
             ),
-            pinned: true,
-          ),
-          _CharacterStartInfo(character: character),
-          _CharacterLocationInfo(character: character),
-          _Episodes(
-            episodes: character.episode,
-          )
-        ],
+            _CharacterStartInfo(character: character),
+            _CharacterLocationInfo(character: character),
+            _Episodes(
+              episodes: character.episode,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -301,41 +314,112 @@ class _Episodes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          if (index == 0) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+    return BlocBuilder<CharacterInfoBloc, CharacterInfoState>(
+      buildWhen: (_, current) => current is! CharacterInfoFailureState,
+      builder: (context, state) {
+        return SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              if (index == 0) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 36),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!.episodes,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.all_episodes,
+                            style: Theme.of(context).textTheme.caption,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      state is CharacterInfoEpisodesState
+                          ? Text(episodes[index])
+                          : _LoadingEpisodeItem(),
+                    ],
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: state is CharacterInfoEpisodesState
+                      ? Text(episodes[index])
+                      : _LoadingEpisodeItem(),
+                );
+              }
+            },
+            childCount:
+                state is CharacterInfoEpisodesState ? episodes.length : 4,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _LoadingEpisodeItem extends StatelessWidget {
+  const _LoadingEpisodeItem({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Shimmer.fromColors(
+        baseColor: AppColors.gray.withOpacity(0.1),
+        highlightColor: Theme.of(context).accentColor,
+        enabled: true,
+        child: Row(
+          children: [
+            Container(
+              height: 74,
+              width: 74,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 36),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppLocalizations.of(context)!.episodes,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
-                      Text(
-                        AppLocalizations.of(context)!.all_episodes,
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ],
+                  Container(
+                    color: Colors.white,
+                    child: Text(
+                      'Episode 1',
+                      style: AppTextStyles.infoItemTitle,
+                    ),
                   ),
-                  const SizedBox(height: 24),
-                  Text(episodes[index]),
+                  const SizedBox(height: 5),
+                  Container(
+                    color: Colors.white,
+                    child: Text(
+                      'Some Episode Name',
+                      textAlign: TextAlign.start,
+                      style: AppTextStyles.infoItemValue,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  Container(
+                    color: Colors.white,
+                    child: Text(
+                      '22 september 2013',
+                      style: AppTextStyles.infoItemDate,
+                    ),
+                  ),
                 ],
               ),
-            );
-          } else {
-            return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(episodes[index]));
-          }
-        },
-        childCount: episodes.length,
+            )
+          ],
+        ),
       ),
     );
   }

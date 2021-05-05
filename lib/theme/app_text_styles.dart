@@ -14,4 +14,22 @@ class AppTextStyles {
     fontSize: 16,
     letterSpacing: 0.5,
   );
+
+  static final infoItemTitle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+    letterSpacing: 1.5,
+  );
+
+  static final infoItemValue = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    letterSpacing: 0.5,
+  );
+
+  static final infoItemDate = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    letterSpacing: 0.25,
+  );
 }
