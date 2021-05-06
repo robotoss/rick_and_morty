@@ -16,7 +16,7 @@ MaterialPageRoute searchRoute(SearchType searchType) {
           repository: context.read<Repository>(),
           searchType: searchType,
         ),
-        child: SearchScreen(),
+        child: SearchScreen(searchType: searchType),
       );
     },
   );

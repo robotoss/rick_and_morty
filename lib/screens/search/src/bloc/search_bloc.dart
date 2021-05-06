@@ -35,7 +35,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     _pageIndex = 1;
     if (searchText.isEmpty) {
       _characters = [];
-      yield SearchActiveState(characters: _characters);
+      yield SearchInitialState();
       return;
     }
     yield SearchLoadingState();

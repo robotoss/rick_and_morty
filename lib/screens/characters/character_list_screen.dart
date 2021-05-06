@@ -124,9 +124,9 @@ class _SearchFilterButton extends StatelessWidget {
                 searchRoute(SearchType.character),
               ),
               child: Container(
-                height: 48,
+                height: 56,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).dialogBackgroundColor,
+                  color: Theme.of(context).dividerColor,
                   borderRadius: BorderRadius.horizontal(
                     left: Radius.circular(100),
                   ),
@@ -151,10 +151,10 @@ class _SearchFilterButton extends StatelessWidget {
           GestureDetector(
             onTap: () {},
             child: Container(
-              height: 48,
+              height: 56,
               width: 50,
               decoration: BoxDecoration(
-                color: Theme.of(context).dialogBackgroundColor,
+                color: Theme.of(context).dividerColor,
                 borderRadius: BorderRadius.horizontal(
                   right: Radius.circular(100),
                 ),

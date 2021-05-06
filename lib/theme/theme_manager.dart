@@ -76,6 +76,13 @@ class ThemeNotifier with ChangeNotifier {
         letterSpacing: 0.25,
         color: Colors.white,
       ),
+      subtitle1: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        letterSpacing: 0.15,
+        color: AppColors.textOverlineDark,
+      ),
     ),
     dialogBackgroundColor: AppColors.lightBlack,
     textButtonTheme: TextButtonThemeData(
@@ -156,6 +163,13 @@ class ThemeNotifier with ChangeNotifier {
         fontSize: 14,
         letterSpacing: 0.25,
         color: Colors.black,
+      ),
+      subtitle1: TextStyle(
+        fontStyle: FontStyle.normal,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+        letterSpacing: 0.15,
+        color: AppColors.textOverlineLight,
       ),
     ),
     dialogBackgroundColor: Colors.white,

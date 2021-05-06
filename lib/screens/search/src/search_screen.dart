@@ -5,14 +5,14 @@ import 'package:rick_and_morty/components/loadings/loading_sliver.dart';
 import 'package:rick_and_morty/components/text_filds/app_bar_search_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
-import 'package:rick_and_morty/screens/character_info/feature.dart';
 import 'package:rick_and_morty/screens/characters/character_list_item.dart';
+import 'package:rick_and_morty/screens/search/feature.dart';
 import 'package:rick_and_morty/screens/search/src/bloc/search_bloc.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
-import 'package:rick_and_morty/data/extensions/character_extentions.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
+  final SearchType searchType;
+  const SearchScreen({Key? key, required this.searchType}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,10 @@ class SearchScreen extends StatelessWidget {
               _AppBar(),
               if (state is SearchLoadingState) LoadingSliver(),
               if (state is SearchActiveState)
-                _Body(characters: state.characters),
+                _Body(
+                  characters: state.characters,
+                  searchType: searchType,
+                ),
             ],
           );
         },
@@ -68,17 +71,62 @@ class _AppBar extends StatelessWidget {
 
 class _Body extends StatelessWidget {
   final List<Character> characters;
-  const _Body({Key? key, required this.characters}) : super(key: key);
+  final SearchType searchType;
+  const _Body({
+    Key? key,
+    required this.characters,
+    required this.searchType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) => ListTile(
-          title: CharacterListItem(character: characters[index]),
-        ),
-        childCount: characters.length,
-      ),
-    );
+    return characters.isNotEmpty
+        ? SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => ListTile(
+                title: CharacterListItem(character: characters[index]),
+              ),
+              childCount: characters.length,
+            ),
+          )
+        : SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const SizedBox(height: 50),
+                _EmptyData(searchType: searchType)
+              ],
+            ),
+          );
+  }
+}
+
+class _EmptyData extends StatelessWidget {
+  final SearchType searchType;
+  const _EmptyData({Key? key, required this.searchType}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    switch (searchType) {
+      case SearchType.character:
+        return Column(
+          children: [
+            Image.asset('assets/images/no_characters.png'),
+            const SizedBox(height: 28),
+            SizedBox(
+              width: 216,
+              child: Text(
+                AppLocalizations.of(context)!
+                    .a_character_with_this_name_was_not_found,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+            ),
+          ],
+        );
+      case SearchType.episode:
+        return Container();
+      case SearchType.location:
+        return Container();
+    }
   }
 }
