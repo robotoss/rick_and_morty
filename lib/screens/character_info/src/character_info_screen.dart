@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/data/api/models/all_characters_model.dart';
+import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
@@ -41,9 +42,7 @@ class CharacterInfoScreen extends StatelessWidget {
             ),
             _CharacterStartInfo(character: character),
             _CharacterLocationInfo(character: character),
-            _Episodes(
-              episodes: character.episode,
-            )
+            _Episodes()
           ],
         ),
       ),
@@ -309,8 +308,7 @@ class _CharacterLocationInfoItem extends StatelessWidget {
 }
 
 class _Episodes extends StatelessWidget {
-  final List<String> episodes;
-  const _Episodes({Key? key, required this.episodes}) : super(key: key);
+  const _Episodes({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -342,7 +340,9 @@ class _Episodes extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       state is CharacterInfoEpisodesState
-                          ? Text(episodes[index])
+                          ? _EpisodeItem(
+                              listEpisodes: state.episodes[index],
+                            )
                           : _LoadingEpisodeItem(),
                     ],
                   ),
@@ -351,16 +351,68 @@ class _Episodes extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: state is CharacterInfoEpisodesState
-                      ? Text(episodes[index])
+                      ? _EpisodeItem(
+                          listEpisodes: state.episodes[index],
+                        )
                       : _LoadingEpisodeItem(),
                 );
               }
             },
             childCount:
-                state is CharacterInfoEpisodesState ? episodes.length : 4,
+                state is CharacterInfoEpisodesState ? state.episodes.length : 4,
           ),
         );
       },
+    );
+  }
+}
+
+class _EpisodeItem extends StatelessWidget {
+  final ListEpisodesModel listEpisodes;
+  const _EpisodeItem({Key? key, required this.listEpisodes}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              height: 74,
+              width: 74,
+              child: Image.network(
+                'http://assets1.ignimgs.com/2018/04/18/rick-and-morty-1-1524080134583.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  listEpisodes.episode,
+                  style: AppTextStyles.infoItemTitle,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  listEpisodes.name,
+                  textAlign: TextAlign.start,
+                  style: AppTextStyles.infoItemValue,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  listEpisodes.airDate,
+                  style: AppTextStyles.infoItemDate,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
