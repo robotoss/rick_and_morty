@@ -32,22 +32,10 @@ class _AppBarSearchTextFieldState extends State<AppBarSearchTextField> {
             RickMorty.search,
             color: Theme.of(context).textTheme.overline!.color,
           ),
-          suffixIcon: Container(
-            width: 40,
-            child: Row(
-              children: [
-                Container(
-                  width: 1,
-                  height: 24,
-                  color: Theme.of(context).textTheme.overline!.color,
-                ),
-                const SizedBox(width: 10),
-                Icon(
-                  RickMorty.filter,
-                  color: Theme.of(context).textTheme.overline!.color,
-                ),
-              ],
-            ),
+          suffixIcon: Icon(
+            RickMorty.close,
+            size: 12,
+            color: Theme.of(context).accentColor,
           ),
           enabledBorder: border,
           errorBorder: border,

@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/components/loadings/portal_loading.dart';
-import 'package:rick_and_morty/components/text_filds/app_bar_search_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rick_and_morty/data/api/models/all_characters_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:rick_and_morty/screens/character_info/feature.dart';
+import 'package:rick_and_morty/screens/search/feature.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
@@ -119,7 +119,9 @@ class _SearchFilterButton extends StatelessWidget {
         children: [
           Expanded(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () => Navigator.of(context, rootNavigator: true).push(
+                searchRoute(SearchType.character),
+              ),
               child: Container(
                 height: 48,
                 decoration: BoxDecoration(
