@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
-import 'package:rick_and_morty/components/loadings/portal_loading.dart';
+import 'package:rick_and_morty/components/loadings/loading_sliver.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
@@ -15,6 +15,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:rick_and_morty/data/extensions/character_extentions.dart';
 
 import 'bloc/characters_bloc.dart';
+import 'character_list_item.dart';
 import 'view_model.dart';
 
 class CharacterListScreen extends StatelessWidget {
@@ -49,7 +50,7 @@ class CharacterListScreen extends StatelessWidget {
                   charactersCount:
                       state is CharactersDataState ? state.charactersCount : 0,
                 ),
-                if (state is CharactersInitialState) _LoadingBody(),
+                if (state is CharactersInitialState) LoadingSliver(),
                 if (state is CharactersDataState)
                   _BodyList(
                     characters: state.characters,
@@ -180,20 +181,6 @@ class _SearchFilterButton extends StatelessWidget {
   }
 }
 
-class _LoadingBody extends StatelessWidget {
-  const _LoadingBody({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 50),
-        child: PortalLoading(),
-      ),
-    );
-  }
-}
-
 class _BodyList extends StatelessWidget {
   final List<Character> characters;
   const _BodyList({Key? key, required this.characters}) : super(key: key);
@@ -209,7 +196,7 @@ class _BodyList extends StatelessWidget {
             ? SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => ListTile(
-                    title: _CharacterListItem(character: characters[index]),
+                    title: CharacterListItem(character: characters[index]),
                   ),
                   childCount: characters.length,
                 ),
@@ -227,68 +214,6 @@ class _BodyList extends StatelessWidget {
                 ),
               );
       },
-    );
-  }
-}
-
-class _CharacterListItem extends StatelessWidget {
-  final Character character;
-  const _CharacterListItem({Key? key, required this.character})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 24),
-      child: InkWell(
-        hoverColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onTap: () => Navigator.of(context, rootNavigator: true).push(
-          characterInfoRoute(character),
-        ),
-        child: Row(
-          children: [
-            Hero(
-              tag: 'CharacterAvatar_${character.id}',
-              child: CircleAvatar(
-                radius: 37,
-                backgroundImage: NetworkImage(character.image),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    character.status.toUpperCase(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .overline!
-                        .copyWith(color: character.statusColor),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    character.name,
-                    maxLines: 2,
-                    textAlign: TextAlign.start,
-                    style: AppTextStyles.charName.copyWith(
-                      color: Theme.of(context).accentColor,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    '${character.species}, ${character.gender}',
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 }

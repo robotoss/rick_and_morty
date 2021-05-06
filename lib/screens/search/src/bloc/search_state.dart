@@ -18,6 +18,8 @@ class SearchActiveState extends SearchState {
   List<Object> get props => [characters];
 }
 
+class SearchLoadingState extends SearchState {}
+
 class SearchFailureState extends SearchState {
   final String message;
 

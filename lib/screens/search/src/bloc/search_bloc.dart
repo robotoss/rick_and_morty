@@ -38,6 +38,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       yield SearchActiveState(characters: _characters);
       return;
     }
+    yield SearchLoadingState();
     try {
       final result = await repository.serverApi
           .getCharactersByName(_pageIndex, searchText);
