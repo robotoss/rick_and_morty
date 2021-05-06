@@ -19,11 +19,13 @@ class ServerApi {
     return ListCharactersModelFromJson(response.toString());
   }
 
-  // /// Get list of all characters
-  // Future<ListCharactersModel> getAllCharacters(int pageIndex) async {
-  //   final response = await dio.get<String>('character/?page=$pageIndex');
-  //   return ListCharactersModelFromJson(response.toString());
-  // }
+  /// Get list of all characters
+  Future<ListCharactersModel> getCharactersByName(
+      int pageIndex, String name) async {
+    final response =
+        await dio.get<String>('character/?page=$pageIndex&name=$name');
+    return ListCharactersModelFromJson(response.toString());
+  }
 
   ///
   /// EPISODES

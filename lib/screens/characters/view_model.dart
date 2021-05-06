@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CharactersViewModel extends ChangeNotifier {
-  final characterTextController = TextEditingController();
-  final characterFocusNode = FocusNode();
-
   final scrollController = ScrollController();
 
   ScrollController addScrollListener(Function onEndOfList) {

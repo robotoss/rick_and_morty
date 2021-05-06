@@ -3,9 +3,14 @@ import 'package:rick_and_morty/theme/rick_morty_icons.dart';
 
 class AppBarSearchTextField extends StatefulWidget {
   final String hintText;
+  final TextEditingController textEditingController;
+  final FocusNode focusNode;
+
   const AppBarSearchTextField({
     Key? key,
     required this.hintText,
+    required this.textEditingController,
+    required this.focusNode,
   }) : super(key: key);
 
   @override
@@ -23,6 +28,8 @@ class _AppBarSearchTextFieldState extends State<AppBarSearchTextField> {
     return Container(
       height: 48,
       child: TextField(
+        controller: widget.textEditingController,
+        focusNode: widget.focusNode,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           hintText: widget.hintText,
