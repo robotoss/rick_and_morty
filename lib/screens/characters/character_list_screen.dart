@@ -74,16 +74,7 @@ class _AppBar extends StatelessWidget {
     final vm = Provider.of<CharactersViewModel>(context);
     return SliverAppBar(
       floating: true,
-      title: Padding(
-        padding: const EdgeInsets.only(top: 10),
-        child: Column(
-          children: [
-            AppBarSearchTextField(
-              hintText: AppLocalizations.of(context)!.find_a_character,
-            ),
-          ],
-        ),
-      ),
+      title: _SearchFilterButton(),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Padding(
@@ -112,6 +103,76 @@ class _AppBar extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _SearchFilterButton extends StatelessWidget {
+  const _SearchFilterButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).dialogBackgroundColor,
+                  borderRadius: BorderRadius.horizontal(
+                    left: Radius.circular(100),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    const SizedBox(width: 15),
+                    Icon(
+                      RickMorty.search,
+                      color: Theme.of(context).textTheme.overline!.color,
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      AppLocalizations.of(context)!.find_a_character,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              height: 48,
+              width: 50,
+              decoration: BoxDecoration(
+                color: Theme.of(context).dialogBackgroundColor,
+                borderRadius: BorderRadius.horizontal(
+                  right: Radius.circular(100),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 1,
+                    height: 24,
+                    color: Theme.of(context).textTheme.overline!.color,
+                  ),
+                  const SizedBox(width: 10),
+                  Icon(
+                    RickMorty.filter,
+                    color: Theme.of(context).textTheme.overline!.color,
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
