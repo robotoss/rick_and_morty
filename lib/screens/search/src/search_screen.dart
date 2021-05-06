@@ -39,17 +39,13 @@ class _AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<SearchViewModel>(context);
     return SliverAppBar(
       floating: true,
       title: AppBarSearchTextField(
         hintText: '',
-        textEditingController: vm.addTextEditingController(
-          (searchText) => context.read<SearchBloc>().add(
-                GetSearchResultEvent(searchText: searchText),
-              ),
-        ),
-        focusNode: vm.searchFocusNode,
+        onTextEnter: (searchText) => context
+            .read<SearchBloc>()
+            .add(GetSearchResultEvent(searchText: searchText)),
       ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(30.0),
