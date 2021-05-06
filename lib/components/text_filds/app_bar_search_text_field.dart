@@ -35,6 +35,9 @@ class _AppBarSearchTextFieldState extends State<AppBarSearchTextField> {
         setState(() {
           showClearButton = true;
         });
+        searchOnChange.add(textController.text);
+      } else {
+        widget.onTextEnter('');
       }
     });
 
@@ -61,44 +64,37 @@ class _AppBarSearchTextFieldState extends State<AppBarSearchTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 48,
-      child: TextField(
-        controller: textController,
-        focusNode: focusNode,
-        textInputAction: TextInputAction.search,
-        autofocus: true,
-        onChanged: (value) => searchOnChange.add(value),
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          hintStyle: Theme.of(context).textTheme.bodyText1,
-          filled: true,
-          suffixIcon: showClearButton
-              ? IconButton(
-                  onPressed: () {
-                    textController.clear();
-                    focusNode.unfocus();
-                    setState(() {
-                      showClearButton = false;
-                    });
-                  },
-                  icon: Icon(
-                    RickMorty.close,
-                    size: 12,
-                    color: Theme.of(context).accentColor,
-                  ),
-                )
-              : null,
-          enabledBorder: border,
-          errorBorder: border,
-          focusedBorder: border,
-          disabledBorder: border,
-          focusedErrorBorder: border,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 16.0,
-          ),
-        ),
+    return TextField(
+      controller: textController,
+      focusNode: focusNode,
+      textInputAction: TextInputAction.search,
+      autofocus: true,
+      decoration: InputDecoration(
+        hintText: widget.hintText,
+        hintStyle: Theme.of(context).textTheme.bodyText1,
+        filled: true,
+        suffixIcon: showClearButton
+            ? IconButton(
+                onPressed: () {
+                  textController.clear();
+                  focusNode.unfocus();
+                  setState(() {
+                    showClearButton = false;
+                  });
+                },
+                icon: Icon(
+                  RickMorty.close,
+                  size: 12,
+                  color: Theme.of(context).accentColor,
+                ),
+              )
+            : null,
+        enabledBorder: border,
+        errorBorder: border,
+        focusedBorder: border,
+        disabledBorder: border,
+        focusedErrorBorder: border,
+        contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
       ),
     );
   }
