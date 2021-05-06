@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/components/loadings/portal_loading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:rick_and_morty/data/api/models/all_characters_model.dart';
+import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:rick_and_morty/screens/character_info/feature.dart';
 import 'package:rick_and_morty/screens/search/feature.dart';

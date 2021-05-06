@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/data/api/models/all_characters_model.dart';
+import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 
 extension StoreDistance on Character {

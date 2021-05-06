@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import 'models/all_characters_model.dart';
+import 'models/list_characters_model.dart';
 import 'models/list_episodes_model.dart';
 
 class ServerApi {
@@ -14,10 +14,16 @@ class ServerApi {
   ///
 
   /// Get list of all characters
-  Future<AllCharactersModel> getAllCharacters(int pageIndex) async {
+  Future<ListCharactersModel> getAllCharacters(int pageIndex) async {
     final response = await dio.get<String>('character/?page=$pageIndex');
-    return allCharactersModelFromJson(response.toString());
+    return ListCharactersModelFromJson(response.toString());
   }
+
+  // /// Get list of all characters
+  // Future<ListCharactersModel> getAllCharacters(int pageIndex) async {
+  //   final response = await dio.get<String>('character/?page=$pageIndex');
+  //   return ListCharactersModelFromJson(response.toString());
+  // }
 
   ///
   /// EPISODES
