@@ -1,18 +1,18 @@
 // To parse this JSON data, do
 //
-//     final allCharactersModel = allCharactersModelFromJson(jsonString);
+//     final ListCharactersModel = ListCharactersModelFromJson(jsonString);
 
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-AllCharactersModel allCharactersModelFromJson(String str) =>
-    AllCharactersModel.fromJson(json.decode(str));
+ListCharactersModel ListCharactersModelFromJson(String str) =>
+    ListCharactersModel.fromJson(json.decode(str));
 
-String allCharactersModelToJson(AllCharactersModel data) =>
+String ListCharactersModelToJson(ListCharactersModel data) =>
     json.encode(data.toJson());
 
-class AllCharactersModel {
-  AllCharactersModel({
+class ListCharactersModel {
+  ListCharactersModel({
     required this.info,
     required this.results,
   });
@@ -20,8 +20,8 @@ class AllCharactersModel {
   Info info;
   List<Character> results;
 
-  factory AllCharactersModel.fromJson(Map<String, dynamic> json) =>
-      AllCharactersModel(
+  factory ListCharactersModel.fromJson(Map<String, dynamic> json) =>
+      ListCharactersModel(
         info: Info.fromJson(json['info']),
         results: List<Character>.from(
             json['results'].map((x) => Character.fromJson(x))),
