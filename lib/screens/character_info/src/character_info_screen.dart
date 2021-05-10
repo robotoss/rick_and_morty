@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -341,7 +342,7 @@ class _Episodes extends StatelessWidget {
                       const SizedBox(height: 12),
                       state is CharacterInfoEpisodesState
                           ? _EpisodeItem(
-                              listEpisodes: state.episodes[index],
+                              episode: state.episodes[index],
                             )
                           : _LoadingEpisodeItem(),
                     ],
@@ -352,7 +353,7 @@ class _Episodes extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: state is CharacterInfoEpisodesState
                       ? _EpisodeItem(
-                          listEpisodes: state.episodes[index],
+                          episode: state.episodes[index],
                         )
                       : _LoadingEpisodeItem(),
                 );
@@ -368,8 +369,8 @@ class _Episodes extends StatelessWidget {
 }
 
 class _EpisodeItem extends StatelessWidget {
-  final ListEpisodesModel listEpisodes;
-  const _EpisodeItem({Key? key, required this.listEpisodes}) : super(key: key);
+  final ListEpisodesModel episode;
+  const _EpisodeItem({Key? key, required this.episode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -382,8 +383,13 @@ class _EpisodeItem extends StatelessWidget {
             child: Container(
               height: 74,
               width: 74,
-              child: Image.network(
-                'http://assets1.ignimgs.com/2018/04/18/rick-and-morty-1-1524080134583.jpg',
+              child: Image.asset(
+                'assets/images/episodes/${episode.episode}.jpg',
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Theme.of(context).accentColor,
+                  );
+                },
                 fit: BoxFit.cover,
               ),
             ),
@@ -394,18 +400,18 @@ class _EpisodeItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  listEpisodes.episode,
+                  episode.episode,
                   style: AppTextStyles.infoItemTitle,
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  listEpisodes.name,
+                  episode.name,
                   textAlign: TextAlign.start,
                   style: AppTextStyles.infoItemValue,
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  listEpisodes.airDate,
+                  episode.airDate,
                   style: AppTextStyles.infoItemDate,
                 ),
               ],
