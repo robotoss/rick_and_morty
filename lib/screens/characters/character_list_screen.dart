@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:rick_and_morty/components/buttons/search_button.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/components/loadings/loading_sliver.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -75,7 +76,14 @@ class _AppBar extends StatelessWidget {
     final vm = Provider.of<CharactersViewModel>(context);
     return SliverAppBar(
       floating: true,
-      title: _SearchFilterButton(),
+      title: SearchFilterButton(
+        title: AppLocalizations.of(context)!.find_a_character,
+        onTap: () {
+          Navigator.of(context, rootNavigator: true).push(
+            searchRoute(SearchType.character),
+          );
+        },
+      ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(60.0),
         child: Padding(
@@ -104,78 +112,6 @@ class _AppBar extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _SearchFilterButton extends StatelessWidget {
-  const _SearchFilterButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: Row(
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () => Navigator.of(context, rootNavigator: true).push(
-                searchRoute(SearchType.character),
-              ),
-              child: Container(
-                height: 56,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).dividerColor,
-                  borderRadius: BorderRadius.horizontal(
-                    left: Radius.circular(100),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(width: 15),
-                    Icon(
-                      RickMorty.search,
-                      color: Theme.of(context).textTheme.overline!.color,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      AppLocalizations.of(context)!.find_a_character,
-                      style: Theme.of(context).textTheme.bodyText1,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              height: 56,
-              width: 50,
-              decoration: BoxDecoration(
-                color: Theme.of(context).dividerColor,
-                borderRadius: BorderRadius.horizontal(
-                  right: Radius.circular(100),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 1,
-                    height: 24,
-                    color: Theme.of(context).textTheme.overline!.color,
-                  ),
-                  const SizedBox(width: 10),
-                  Icon(
-                    RickMorty.filter,
-                    color: Theme.of(context).textTheme.overline!.color,
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
       ),
     );
   }
