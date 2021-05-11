@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
-import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
+import 'package:rick_and_morty/data/api/models/episodes_model.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
@@ -369,7 +369,7 @@ class _Episodes extends StatelessWidget {
 }
 
 class _EpisodeItem extends StatelessWidget {
-  final ListEpisodesModel episode;
+  final EpisodesModel episode;
   const _EpisodeItem({Key? key, required this.episode}) : super(key: key);
 
   @override

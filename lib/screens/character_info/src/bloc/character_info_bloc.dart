@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
-import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
+import 'package:rick_and_morty/data/api/models/episodes_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:path/path.dart' as path;
 
@@ -28,7 +28,7 @@ class CharacterInfoBloc extends Bloc<CharacterInfoEvent, CharacterInfoState> {
   }
 
   Stream<CharacterInfoState> _buildGetEpisodesEvent() async* {
-    List<ListEpisodesModel>? episodes;
+    List<EpisodesModel>? episodes;
     var episodesNumbers = <String>[];
 
     for (final episode in character.episode) {

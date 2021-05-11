@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import 'models/list_characters_model.dart';
-import 'models/list_episodes_model.dart';
+import 'models/episodes_model.dart';
 
 class ServerApi {
   final Dio dio;
@@ -32,13 +32,12 @@ class ServerApi {
   ///
 
   /// Get multiple episodes
-  Future<List<ListEpisodesModel>> getMultipleEpisodes(
-      List<String> episodes) async {
+  Future<List<EpisodesModel>> getMultipleEpisodes(List<String> episodes) async {
     final response = await dio.get<String>('episode/${episodes.join(",")}');
     if (episodes.length > 1) {
-      return listEpisodesModelFromJson(response.toString());
+      return EpisodesModelFromJson(response.toString());
     } else {
-      return [ListEpisodesModel.fromJson(jsonDecode(response.toString()))];
+      return [EpisodesModel.fromJson(jsonDecode(response.toString()))];
     }
   }
 }

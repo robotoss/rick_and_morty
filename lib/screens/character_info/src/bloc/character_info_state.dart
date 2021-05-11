@@ -10,7 +10,7 @@ abstract class CharacterInfoState extends Equatable {
 class CharacterInfoInitialState extends CharacterInfoState {}
 
 class CharacterInfoEpisodesState extends CharacterInfoState {
-  final List<ListEpisodesModel> episodes;
+  final List<EpisodesModel> episodes;
   CharacterInfoEpisodesState({required this.episodes});
 
   @override
