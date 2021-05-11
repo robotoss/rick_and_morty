@@ -12,11 +12,11 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
   final Repository repository;
   CharactersBloc({required this.repository}) : super(CharactersInitialState());
 
-  int _pageIndex = 1;
+  var _pageIndex = 1;
 
-  List<Character> _characters = [];
+  var _characters = <Character>[];
 
-  int _charactersCount = 0;
+  var _charactersCount = 0;
 
   @override
   Stream<CharactersState> mapEventToState(

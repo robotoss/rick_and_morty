@@ -19,5 +19,11 @@ void main() {
 
       expect(response.results, isNotEmpty);
     });
+
+    test('getAllEpisodes', () async {
+      final response = await serverApi.getAllEpisodes(1);
+
+      expect(response.results, isNotEmpty);
+    });
   });
 }

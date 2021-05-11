@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 
 import 'models/list_characters_model.dart';
 import 'models/episodes_model.dart';
+import 'models/list_episodes_model.dart';
 
 class ServerApi {
   final Dio dio;
@@ -39,5 +40,11 @@ class ServerApi {
     } else {
       return [EpisodesModel.fromJson(jsonDecode(response.toString()))];
     }
+  }
+
+  /// Get list of all episodes
+  Future<EpisodesListModel> getAllEpisodes(int pageIndex) async {
+    final response = await dio.get<String>('episode/?page=$pageIndex');
+    return episodesListModelFromJson(response.toString());
   }
 }

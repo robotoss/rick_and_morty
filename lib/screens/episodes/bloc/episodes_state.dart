@@ -9,7 +9,18 @@ abstract class EpisodesState extends Equatable {
 
 class EpisodesInitialState extends EpisodesState {}
 
-class EpisodesDataState extends EpisodesState {}
+class EpisodesDataState extends EpisodesState {
+  final List<Episodes> episodes;
+  final bool isLoading;
+
+  const EpisodesDataState({
+    required this.episodes,
+    required this.isLoading,
+  });
+
+  @override
+  List<Object> get props => [episodes, isLoading];
+}
 
 class EpisodesFailureState extends EpisodesState {
   final String message;

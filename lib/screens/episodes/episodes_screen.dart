@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/components/buttons/search_button.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
-import 'package:rick_and_morty/components/loadings/loading_sliver.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -18,7 +17,7 @@ class EpisodesScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => EpisodesBloc(
         repository: context.read<Repository>(),
-      ),
+      )..add(GetEpisodesEvent()),
       child: ChangeNotifierProvider(
         create: (_) => EpisodesViewModel(),
         child: DefaultTabController(
