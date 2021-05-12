@@ -18,6 +18,8 @@ class CharacterInfoBloc extends Bloc<CharacterInfoEvent, CharacterInfoState> {
     required this.repository,
   }) : super(CharacterInfoInitialState());
 
+  final _episodes = <EpisodesModel>[];
+
   @override
   Stream<CharacterInfoState> mapEventToState(
     CharacterInfoEvent event,
@@ -28,19 +30,21 @@ class CharacterInfoBloc extends Bloc<CharacterInfoEvent, CharacterInfoState> {
   }
 
   Stream<CharacterInfoState> _buildGetEpisodesEvent() async* {
-    List<EpisodesModel>? episodes;
-    var episodesNumbers = <String>[];
-
+    // Number of episodes parced from episodes url in character data
+    final episodesNumbers = <String>[];
+    // Parce character data
     for (final episode in character.episode) {
       episodesNumbers.add(path.basename(episode));
     }
 
     try {
-      episodes =
-          await repository.serverApi.getMultipleEpisodes(episodesNumbers);
+      // Try to get data from server
+      _episodes.addAll(
+        await repository.serverApi.getMultipleEpisodes(episodesNumbers),
+      );
     } catch (error) {
       yield CharacterInfoFailureState(message: error.toString());
     }
-    yield CharacterInfoEpisodesState(episodes: episodes ?? []);
+    yield CharacterInfoEpisodesState(episodes: _episodes);
   }
 }

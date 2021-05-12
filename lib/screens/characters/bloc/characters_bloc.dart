@@ -37,8 +37,11 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   Stream<CharactersState> _buildGetAllCharactersEvent() async* {
     try {
+      // Try to get data from server
       final response = await repository.serverApi.getAllCharacters(_pageIndex);
+      // Up index to download next page from server
       _pageIndex++;
+      // Set data from sever to local variabels
       _characters = response.results;
       _charactersCount = response.info.count;
     } catch (error) {
@@ -59,7 +62,9 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     );
 
     try {
+      // Try to get data from server
       final response = await repository.serverApi.getAllCharacters(_pageIndex);
+      // Up index to download next page from server
       _pageIndex++;
       _characters.addAll(response.results);
     } catch (error) {

@@ -28,20 +28,26 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
 
   Stream<EpisodesState> getEpisodesEventBuild() async* {
     try {
+      // Try to get data from server
       final response = await repository.serverApi.getAllEpisodes(_pageIndex);
+      // Up index to download next page from server
       _pageIndex++;
       _allEpisodes.addAll(response.results);
       if (response.info.next != null) {
+        // If we have nextPage we try to get more episodes data
         add(GetEpisodesEvent());
         return;
       }
     } catch (error) {
       yield EpisodesFailureState(message: error.toString());
     }
-
+    // Variable to sort all episodes by seasons
     final episodesBySeasonsModel = <EpisodesBySeasonsModel>[];
     for (final episode in _allEpisodes) {
+      // Try to get season in int by parce season code of the episode.
+      // it is like S01E01
       final season = int.parse(episode.episode.substring(1, 3));
+      // Create new season data
       if (episodesBySeasonsModel.isEmpty) {
         episodesBySeasonsModel.add(
           EpisodesBySeasonsModel(
@@ -49,8 +55,10 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
             episodes: [episode],
           ),
         );
+        // Add episodes to season
       } else if (episodesBySeasonsModel.last.season == season) {
         episodesBySeasonsModel.last.episodes.add(episode);
+        // Create new season data
       } else {
         episodesBySeasonsModel.add(
           EpisodesBySeasonsModel(
