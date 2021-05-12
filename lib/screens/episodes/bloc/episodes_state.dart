@@ -11,15 +11,11 @@ class EpisodesInitialState extends EpisodesState {}
 
 class EpisodesDataState extends EpisodesState {
   final List<EpisodesBySeasonsModel> episodes;
-  final bool isLoading;
 
-  const EpisodesDataState({
-    required this.episodes,
-    required this.isLoading,
-  });
+  const EpisodesDataState({required this.episodes});
 
   @override
-  List<Object> get props => [episodes, isLoading];
+  List<Object> get props => [episodes];
 }
 
 class EpisodesFailureState extends EpisodesState {

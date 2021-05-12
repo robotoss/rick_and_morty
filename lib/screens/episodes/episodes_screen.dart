@@ -3,8 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/components/buttons/search_button.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
+import 'package:rick_and_morty/components/loadings/portal_loading.dart';
+import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rick_and_morty/screens/episodes/model.dart';
+import 'package:rick_and_morty/theme/app_colors.dart';
+import 'package:rick_and_morty/theme/app_text_styles.dart';
 
 import 'bloc/episodes_bloc.dart';
 import 'view_model.dart';
@@ -39,13 +44,7 @@ class EpisodesScreen extends StatelessWidget {
                 ),
                 headerSliverBuilder: (context, innerBoxIsScrolled) =>
                     [_AppBar()],
-                body: _BodyList(),
-                // slivers: [
-                //   _AppBar(),
-                //   // if (state is EpisodesInitialState) LoadingSliver(),
-                //   // if (state is EpisodesDataState) _BodyList(),
-                //   _BodyList()
-                // ],
+                body: _BodyList(state: state),
               );
             },
           )),
@@ -70,20 +69,17 @@ class _AppBar extends StatelessWidget {
         preferredSize: Size.fromHeight(60.0),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TabBar(tabs: [
-            Text(
-              AppLocalizations.of(context)!.season(1),
-            ),
-            Text(
-              AppLocalizations.of(context)!.season(2),
-            ),
-            Text(
-              AppLocalizations.of(context)!.season(3),
-            ),
-            Text(
-              AppLocalizations.of(context)!.season(4),
-            ),
-          ]),
+          child: TabBar(
+            tabs: [
+              for (final index in List<int>.generate(4, (i) => i + 1))
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    AppLocalizations.of(context)!.season(index).toUpperCase(),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
@@ -91,44 +87,105 @@ class _AppBar extends StatelessWidget {
 }
 
 class _BodyList extends StatelessWidget {
-  const _BodyList({
+  final EpisodesState state;
+
+  const _BodyList({Key? key, required this.state}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TabBarView(
+      children: [
+        for (final index in List<int>.generate(4, (i) => i + 1))
+          state is EpisodesDataState
+              ? _EpisodesList(
+                  state: state as EpisodesDataState,
+                  season: index,
+                )
+              : Padding(
+                  padding: const EdgeInsets.only(top: 50),
+                  child: PortalLoading(),
+                )
+      ],
+    );
+  }
+}
+
+class _EpisodesList extends StatelessWidget {
+  final EpisodesDataState state;
+  final int season;
+  _EpisodesList({
     Key? key,
+    required this.state,
+    required this.season,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(children: [
-      ListView.builder(
-        itemCount: 100,
-        itemBuilder: (context, index) => Text('$index'),
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      itemCount: state.episodes[season - 1].episodes.length,
+      itemBuilder: (context, index) => _EpisodeItem(
+        episode: state.episodes[season - 1].episodes[index],
       ),
-      Text('2'),
-      Text('3'),
-      Text('4'),
-      // SliverList(
-      //   delegate: SliverChildBuilderDelegate(
-      //     (context, index) => Text('123'),
-      //     childCount: 40,
-      //   ),
-      // ),
-      // SliverList(
-      //   delegate: SliverChildBuilderDelegate(
-      //     (context, index) => Text('123'),
-      //     childCount: 40,
-      //   ),
-      // ),
-      // SliverList(
-      //   delegate: SliverChildBuilderDelegate(
-      //     (context, index) => Text('123'),
-      //     childCount: 40,
-      //   ),
-      // ),
-      // SliverList(
-      //   delegate: SliverChildBuilderDelegate(
-      //     (context, index) => Text('123'),
-      //     childCount: 40,
-      //   ),
-      // ),
-    ]);
+    );
+  }
+}
+
+class _EpisodeItem extends StatelessWidget {
+  final Episodes episode;
+  const _EpisodeItem({Key? key, required this.episode}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              height: 74,
+              width: 74,
+              child: Image.asset(
+                'assets/images/episodes/${episode.episode}.jpg',
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Theme.of(context).accentColor,
+                  );
+                },
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  episode.episode,
+                  style: AppTextStyles.infoItemTitle.copyWith(
+                    color: AppColors.lightBlue.withOpacity(0.87),
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  episode.name,
+                  textAlign: TextAlign.start,
+                  style: AppTextStyles.infoItemValue,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  episode.airDate,
+                  style: AppTextStyles.infoItemDate.copyWith(
+                    color: AppColors.subTitle,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

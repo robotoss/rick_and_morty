@@ -401,7 +401,9 @@ class _EpisodeItem extends StatelessWidget {
               children: [
                 Text(
                   episode.episode,
-                  style: AppTextStyles.infoItemTitle,
+                  style: AppTextStyles.infoItemTitle.copyWith(
+                    color: AppColors.lightBlue.withOpacity(0.87),
+                  ),
                 ),
                 const SizedBox(height: 5),
                 Text(
@@ -412,7 +414,9 @@ class _EpisodeItem extends StatelessWidget {
                 const SizedBox(height: 5),
                 Text(
                   episode.airDate,
-                  style: AppTextStyles.infoItemDate,
+                  style: AppTextStyles.infoItemDate.copyWith(
+                    color: AppColors.subTitle,
+                  ),
                 ),
               ],
             ),

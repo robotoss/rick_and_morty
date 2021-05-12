@@ -61,9 +61,6 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
       }
     }
 
-    yield EpisodesDataState(
-      episodes: episodesBySeasonsModel,
-      isLoading: false,
-    );
+    yield EpisodesDataState(episodes: episodesBySeasonsModel);
   }
 }

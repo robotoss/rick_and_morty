@@ -16,4 +16,5 @@ class AppColors {
   static const subTitle = Color(0xFF6E798C);
   static const buttonText = Color(0xFF4F4F4F);
   static const black = Color(0xFF0B1E2D);
+  static const lightBlue = Color(0xFF22A2BD);
 }
