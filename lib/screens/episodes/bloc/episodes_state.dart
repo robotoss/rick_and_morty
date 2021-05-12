@@ -10,7 +10,7 @@ abstract class EpisodesState extends Equatable {
 class EpisodesInitialState extends EpisodesState {}
 
 class EpisodesDataState extends EpisodesState {
-  final List<Episodes> episodes;
+  final List<EpisodesBySeasonsModel> episodes;
   final bool isLoading;
 
   const EpisodesDataState({
