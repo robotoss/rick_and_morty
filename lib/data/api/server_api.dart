@@ -33,12 +33,12 @@ class ServerApi {
   ///
 
   /// Get multiple episodes
-  Future<List<EpisodesModel>> getMultipleEpisodes(List<String> episodes) async {
+  Future<List<Episode>> getMultipleEpisodes(List<String> episodes) async {
     final response = await dio.get<String>('episode/${episodes.join(",")}');
     if (episodes.length > 1) {
       return EpisodesModelFromJson(response.toString());
     } else {
-      return [EpisodesModel.fromJson(jsonDecode(response.toString()))];
+      return [Episode.fromJson(jsonDecode(response.toString()))];
     }
   }
 

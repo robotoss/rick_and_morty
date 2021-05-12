@@ -7,6 +7,7 @@ import 'package:rick_and_morty/components/loadings/portal_loading.dart';
 import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rick_and_morty/screens/episode_info/feature.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 
@@ -119,59 +120,64 @@ class _EpisodesList extends StatelessWidget {
 }
 
 class _EpisodeItem extends StatelessWidget {
-  final Episodes episode;
+  final Episode episode;
   const _EpisodeItem({Key? key, required this.episode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Container(
-              height: 74,
-              width: 74,
-              child: Image.asset(
-                'assets/images/episodes/${episode.episode}.jpg',
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Theme.of(context).accentColor,
-                  );
-                },
-                fit: BoxFit.cover,
+      child: InkWell(
+        onTap: () => Navigator.of(context, rootNavigator: true).push(
+          episodeInfoRoute(episode),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Container(
+                height: 74,
+                width: 74,
+                child: Image.asset(
+                  'assets/images/episodes/${episode.episode}.jpg',
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Theme.of(context).accentColor,
+                    );
+                  },
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  episode.episode,
-                  style: AppTextStyles.infoItemTitle.copyWith(
-                    color: AppColors.lightBlue.withOpacity(0.87),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    episode.episode,
+                    style: AppTextStyles.infoItemTitle.copyWith(
+                      color: AppColors.lightBlue.withOpacity(0.87),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  episode.name,
-                  textAlign: TextAlign.start,
-                  style: AppTextStyles.infoItemValue,
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  episode.airDate,
-                  style: AppTextStyles.infoItemDate.copyWith(
-                    color: AppColors.subTitle,
+                  const SizedBox(height: 5),
+                  Text(
+                    episode.name,
+                    textAlign: TextAlign.start,
+                    style: AppTextStyles.infoItemValue,
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                  const SizedBox(height: 5),
+                  Text(
+                    episode.airDate,
+                    style: AppTextStyles.infoItemDate.copyWith(
+                      color: AppColors.subTitle,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

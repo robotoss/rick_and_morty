@@ -15,7 +15,7 @@ class EpisodesBloc extends Bloc<EpisodesEvent, EpisodesState> {
 
   var _pageIndex = 1;
 
-  final _allEpisodes = <Episodes>[];
+  final _allEpisodes = <Episode>[];
 
   @override
   Stream<EpisodesState> mapEventToState(

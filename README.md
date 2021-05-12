@@ -9,7 +9,7 @@ A mobile app to help you learn more about the world of Rick and Morty.
 
 - Characters
 - Locations
-- Episodes
+- Episode
 
 ## Features
 

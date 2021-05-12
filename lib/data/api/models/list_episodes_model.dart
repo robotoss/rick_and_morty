@@ -13,13 +13,13 @@ class EpisodesListModel {
   });
 
   Info info;
-  List<Episodes> results;
+  List<Episode> results;
 
   factory EpisodesListModel.fromJson(Map<String, dynamic> json) =>
       EpisodesListModel(
         info: Info.fromJson(json['info']),
-        results: List<Episodes>.from(
-            json['results'].map((x) => Episodes.fromJson(x))),
+        results:
+            List<Episode>.from(json['results'].map((x) => Episode.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,8 +56,8 @@ class Info {
       };
 }
 
-class Episodes {
-  Episodes({
+class Episode {
+  Episode({
     required this.id,
     required this.name,
     required this.airDate,
@@ -75,7 +75,7 @@ class Episodes {
   String url;
   DateTime created;
 
-  factory Episodes.fromJson(Map<String, dynamic> json) => Episodes(
+  factory Episode.fromJson(Map<String, dynamic> json) => Episode(
         id: json['id'],
         name: json['name'],
         airDate: json['air_date'],
