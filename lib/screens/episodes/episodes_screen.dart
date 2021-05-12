@@ -63,7 +63,7 @@ class _AppBar extends StatelessWidget {
     return SliverAppBar(
       floating: true,
       title: SearchFilterButton(
-        title: AppLocalizations.of(context)!.episodes,
+        title: AppLocalizations.of(context)!.findTheEpisode,
         onTap: () {},
       ),
       bottom: PreferredSize(
@@ -71,10 +71,18 @@ class _AppBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: TabBar(tabs: [
-            Text('1'),
-            Text('2'),
-            Text('3'),
-            Text('4'),
+            Text(
+              AppLocalizations.of(context)!.season(1),
+            ),
+            Text(
+              AppLocalizations.of(context)!.season(2),
+            ),
+            Text(
+              AppLocalizations.of(context)!.season(3),
+            ),
+            Text(
+              AppLocalizations.of(context)!.season(4),
+            ),
           ]),
         ),
       ),

@@ -40,6 +40,8 @@
   "wantToQuitTheApp": "Выйти из приложения?",
   "yes": "Да",
   "no": "Нет",
-  "close": "Закрыть"
+  "close": "Закрыть",
+  "season": "{index} Сезон",
+  "findTheEpisode": "Найти эпизод"
 }
 

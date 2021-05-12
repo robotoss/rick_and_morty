@@ -169,6 +169,17 @@
   "close": "Close",
   "@close": {
       "description": ""
+  },
+  "season": "{index} Season",
+  "@season": {
+    "description": "",
+    "placeholders": {
+      "index": {}
+    }
+  },
+  "findTheEpisode": "Find the Episode",
+  "@findTheEpisode": {
+      "description": ""
   }
 }
 
