@@ -7,7 +7,6 @@ import 'package:rick_and_morty/components/loadings/portal_loading.dart';
 import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
 import 'package:rick_and_morty/data/repository/repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:rick_and_morty/screens/episodes/model.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/app_text_styles.dart';
 
@@ -28,59 +27,47 @@ class EpisodesScreen extends StatelessWidget {
         child: DefaultTabController(
           length: 4,
           child: Scaffold(
+              appBar: _AppBar(),
               body: BlocConsumer<EpisodesBloc, EpisodesState>(
-            listener: (context, state) {
-              if (state is EpisodesFailureState) {
-                showErrorSnakBar(context, state.message);
-              }
-            },
-            buildWhen: (_, current) => current is! EpisodesFailureState,
-            builder: (context, state) {
-              return NestedScrollView(
-                floatHeaderSlivers: true,
-                controller:
-                    Provider.of<EpisodesViewModel>(context).addScrollListener(
-                  () {},
-                ),
-                headerSliverBuilder: (context, innerBoxIsScrolled) =>
-                    [_AppBar()],
-                body: _BodyList(state: state),
-              );
-            },
-          )),
+                listener: (context, state) {
+                  if (state is EpisodesFailureState) {
+                    showErrorSnakBar(context, state.message);
+                  }
+                },
+                buildWhen: (_, current) => current is! EpisodesFailureState,
+                builder: (context, state) {
+                  return _BodyList(state: state);
+                },
+              )),
         ),
       ),
     );
   }
 }
 
-class _AppBar extends StatelessWidget {
+class _AppBar extends StatelessWidget implements PreferredSizeWidget {
   const _AppBar({Key? key}) : super(key: key);
 
   @override
+  Size get preferredSize => Size.fromHeight(110);
+
+  @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      floating: true,
+    return AppBar(
       title: SearchFilterButton(
         title: AppLocalizations.of(context)!.findTheEpisode,
         onTap: () {},
       ),
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(60.0),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: TabBar(
-            tabs: [
-              for (final index in List<int>.generate(4, (i) => i + 1))
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    AppLocalizations.of(context)!.season(index).toUpperCase(),
-                  ),
-                ),
-            ],
-          ),
-        ),
+      bottom: TabBar(
+        tabs: [
+          for (final index in List<int>.generate(4, (i) => i + 1))
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                AppLocalizations.of(context)!.season(index).toUpperCase(),
+              ),
+            ),
+        ],
       ),
     );
   }
