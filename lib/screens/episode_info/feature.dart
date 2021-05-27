@@ -6,14 +6,14 @@ import 'package:rick_and_morty/data/repository/repository.dart';
 import 'src/bloc/episode_info_bloc.dart';
 import 'src/episode_info_screen.dart';
 
-MaterialPageRoute episodeInfoRoute(Episode character) {
+MaterialPageRoute episodeInfoRoute(Episode episode) {
   return MaterialPageRoute(
     builder: (context) {
       return BlocProvider(
         create: (context) => EpisodeInfoBloc(
           repository: context.read<Repository>(),
         ),
-        child: EpisodeInfoScreen(),
+        child: EpisodeInfoScreen(episode: episode),
       );
     },
   );

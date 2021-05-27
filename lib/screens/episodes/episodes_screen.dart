@@ -60,6 +60,7 @@ class _AppBar extends StatelessWidget implements PreferredSizeWidget {
         onTap: () {},
       ),
       bottom: TabBar(
+        isScrollable: true,
         tabs: [
           for (final index in List<int>.generate(4, (i) => i + 1))
             Padding(
