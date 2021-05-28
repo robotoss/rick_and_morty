@@ -18,6 +18,8 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
 
   var _charactersCount = 0;
 
+  var endList = false;
+
   @override
   Stream<CharactersState> mapEventToState(
     CharactersEvent event,
@@ -25,13 +27,11 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     if (event is GetAllCharactersEvent) {
       yield* _buildGetAllCharactersEvent();
     }
-
-    if (state is CharactersDataState) {
-      final _state = state as CharactersDataState;
-      if (!_state.isLoading) yield* _buildGetMoreCharactersEvent();
-    }
     if (event is GetMoreCharactersEvent) {
-      yield* _buildGetMoreCharactersEvent();
+      final _state = state as CharactersDataState;
+      if (!_state.isLoading && !endList) {
+        yield* _buildGetMoreCharactersEvent();
+      }
     }
   }
 
@@ -64,8 +64,12 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
     try {
       // Try to get data from server
       final response = await repository.serverApi.getAllCharacters(_pageIndex);
-      // Up index to download next page from server
-      _pageIndex++;
+      if (response.info.next != null) {
+        // Up index to download next page from server
+        _pageIndex++;
+      } else {
+        endList = true;
+      }
       _characters.addAll(response.results);
     } catch (error) {
       yield CharactersFailureState(message: error.toString());
