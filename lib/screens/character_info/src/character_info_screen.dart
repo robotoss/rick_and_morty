@@ -1,11 +1,9 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/components/dialogs/error_snak_bar.dart';
 import 'package:rick_and_morty/data/api/models/list_characters_model.dart';
-import 'package:rick_and_morty/data/api/models/episodes_model.dart';
 import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
 import 'package:rick_and_morty/data/helpers/app_math.dart';
 import 'package:rick_and_morty/screens/episode_info/feature.dart';

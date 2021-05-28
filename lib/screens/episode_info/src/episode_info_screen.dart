@@ -6,6 +6,7 @@ import 'package:rick_and_morty/data/api/models/list_episodes_model.dart';
 import 'package:rick_and_morty/data/helpers/app_math.dart';
 import 'package:rick_and_morty/theme/app_colors.dart';
 import 'package:rick_and_morty/theme/rick_morty_icons.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'bloc/episode_info_bloc.dart';
 
@@ -32,14 +33,51 @@ class EpisodeInfoScreen extends StatelessWidget {
               ),
               pinned: true,
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(
-                  title: Text('$index'),
-                ),
-                childCount: 100,
+            _EpisodeTitle(episode: episode)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _EpisodeTitle extends StatelessWidget {
+  final Episode episode;
+  const _EpisodeTitle({Key? key, required this.episode}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          children: [
+            const SizedBox(height: 32),
+            Text(
+              episode.name,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              episode.episode,
+              style: Theme.of(context).textTheme.overline,
+            ),
+            const SizedBox(height: 36),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                AppLocalizations.of(context)!.premiere,
+                style: Theme.of(context).textTheme.caption,
               ),
-            )
+            ),
+            const SizedBox(height: 4),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                episode.airDate,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ),
           ],
         ),
       ),
@@ -77,15 +115,6 @@ class _AppBar extends SliverPersistentHeaderDelegate {
               fit: BoxFit.cover,
             ),
           ),
-          // child: ClipRRect(
-          //   child: BackdropFilter(
-          //     filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-          //     child: Container( 
-          //       alignment: Alignment.center,
-          //       color: AppColors.black.withOpacity(0.5),
-          //     ),
-          //   ),
-          // ),
         ),
         AppBar(
           backgroundColor: Colors.transparent,
