@@ -6,3 +6,5 @@ abstract class EpisodeInfoEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetCharactersEvent extends EpisodeInfoEvent {}

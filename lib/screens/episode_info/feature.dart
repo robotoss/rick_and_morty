@@ -12,7 +12,8 @@ MaterialPageRoute episodeInfoRoute(Episode episode) {
       return BlocProvider(
         create: (context) => EpisodeInfoBloc(
           repository: context.read<Repository>(),
-        ),
+          episode: episode,
+        )..add(GetCharactersEvent()),
         child: EpisodeInfoScreen(episode: episode),
       );
     },
