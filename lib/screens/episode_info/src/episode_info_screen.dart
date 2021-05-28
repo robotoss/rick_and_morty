@@ -33,7 +33,8 @@ class EpisodeInfoScreen extends StatelessWidget {
               ),
               pinned: true,
             ),
-            _EpisodeTitle(episode: episode)
+            _EpisodeTitle(episode: episode),
+            _Divider()
           ],
         ),
       ),
@@ -78,8 +79,23 @@ class _EpisodeTitle extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyText2,
               ),
             ),
+            const SizedBox(height: 36),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverToBoxAdapter(
+      child: const Divider(
+        thickness: 2,
+        height: 2,
       ),
     );
   }
