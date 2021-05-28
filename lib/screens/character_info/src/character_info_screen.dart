@@ -420,7 +420,11 @@ class _EpisodeItem extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            Icon(
+              RickMorty.forward,
+              size: 16,
+            ),
           ],
         ),
       ),
